@@ -1,0 +1,47 @@
+{
+  "name": "vaccinations_backend",
+  "version": "0.1.0",
+  "description": "Assignment for applying Solita Dev Academy - backend",
+  "main": "backend.js",
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "scripts": {
+    "cm": "git-cz",
+    "release": "standard-version",
+    "start": "node ./backend.js",
+    "test": "jest --testTimeout=10000",
+    "devStart": "nodemon ./backend.js localhost 4000"
+  },
+  "keywords": [
+    "solita",
+    "academy",
+    "node",
+    "assignment"
+  ],
+  "author": "RedFoxFinn",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "express": "^4.17.1",
+    "jest-extended": "^0.11.5"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
+    "commitizen": "^4.2.4",
+    "husky": "^6.0.0",
+    "jest": "^27.0.4",
+    "nodemon": "^2.0.7",
+    "standard-version": "^9.3.0",
+    "supertest": "^6.1.3"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
+  }
+}
