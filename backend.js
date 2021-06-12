@@ -1,11 +1,26 @@
-const express = require('express');
-const fs = require('fs');
-const axios = require('axios');
 
+const config = require('./tools/config');
+
+const http = require('http');
+const path = require('path');
+
+const mongoose = require('mongoose');
+const express = require('express'),
+  app = express(),
+  PORT = config.port;
+
+const apolloServer = require('./controllers/graphql/gql_server');
 const data_retriever = require('./tools/data_retriever');
 
-const app = express();
+// mongoose setup
+mongoose.set('useFindAndModify', false);
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useUnifiedTopology', true);
+mongoose.set('useCreateIndex', true);
 
+try {} catch (e) {}
+
+// backend routing declaration
 app.route('/')
   .get((req,res) => {
     res.send(`Vaccinations backend says 'hi'`);
@@ -38,6 +53,10 @@ app.route('/data/vaccinations')
     res.json(data_vaccinations);
   });
 
-app.listen(4000, () => {
-  console.log(`And we're live!`);
+apolloServer.applyMiddleware({ app, path: ['/api', '/graphql'] });
+const backend = http.createServer(app);
+apolloServer.installSubscriptionHandlers(backend);
+
+backend.listen(PORT, () => {
+  console.log(`And we're live in ${config.env}-mode!`);
 });
