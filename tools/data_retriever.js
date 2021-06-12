@@ -21,7 +21,7 @@ const data_retriever = async (which_data) => {
           json.vaccines.antiqua.push(JSON.parse(entry)); 
         });
       } catch (e) {
-        console.error(e);
+        console.log(e);
       }
       try {
         const response = await axios.get(data_url.solar_buddhica);
@@ -30,7 +30,7 @@ const data_retriever = async (which_data) => {
           json.vaccines.solar_buddhica.push(JSON.parse(entry)); 
         });
       } catch (e) {
-        console.error(e);
+        console.log(e);
       }
       try {
         const response = await axios.get(data_url.zerpfy);
@@ -39,7 +39,7 @@ const data_retriever = async (which_data) => {
           json.vaccines.zerpfy.push(JSON.parse(entry)); 
         });
       } catch (e) {
-        console.error(e);
+        console.log(e);
       }
       try {
         const response = await axios.get(data_url.vaccinations);
@@ -48,7 +48,7 @@ const data_retriever = async (which_data) => {
           json.vaccinations.push(JSON.parse(entry)); 
         });
       } catch (e) {
-        console.error(e);
+        console.log(e);
       }
       return json;
     };
@@ -60,7 +60,7 @@ const data_retriever = async (which_data) => {
           json.vaccines.antiqua.push(JSON.parse(entry)); 
         });
       } catch (e) {
-        console.error(e);
+        console.log(e);
       }
       return json.vaccines.antiqua;
     };
@@ -72,7 +72,7 @@ const data_retriever = async (which_data) => {
           json.vaccines.solar_buddhica.push(JSON.parse(entry)); 
         });
       } catch (e) {
-        console.error(e);
+        console.log(e);
       }
       return json.vaccines.solar_buddhica;
     };
@@ -84,7 +84,7 @@ const data_retriever = async (which_data) => {
           json.vaccines.zerpfy.push(JSON.parse(entry)); 
         });
       } catch (e) {
-        console.error(e);
+        console.log(e);
       }
       return json.vaccines.zerpfy;
     };
@@ -96,7 +96,7 @@ const data_retriever = async (which_data) => {
           json.vaccinations.push(JSON.parse(entry)); 
         });
       } catch (e) {
-        console.error(e);
+        console.log(e);
       }
       return json.vaccinations;
     };
