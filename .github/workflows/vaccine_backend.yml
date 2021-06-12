@@ -1,0 +1,16 @@
+name: vaccinations backend tests
+on: [push]
+jobs:
+  unit_tests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 14.x
+    - name: install
+      run: yarn install
+    - name: tests
+      run: yarn ci-test
+      env:
+        CI: true

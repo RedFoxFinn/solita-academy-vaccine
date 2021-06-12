@@ -13,6 +13,7 @@
     "release": "standard-version",
     "start": "node ./backend.js",
     "test": "jest --testTimeout=10000",
+    "ci-test": "jest --verbose --transformIgnorePatterns 'node_modules/*' --detectOpenHandles",
     "devStart": "nodemon ./backend.js localhost 4000"
   },
   "keywords": [
