@@ -21,11 +21,10 @@ const typeDefs = gql`
     vaccine(id: String!): Vaccine!,
     vaccinations: [Vaccination!]!,
     vaccinationCount(gender: String): Int!,
-    vaccineCount(brand: String): Int!,
     vaccineOrderCount(brand: String): Int!,
     vaccineInjectionCount(brand: String): Int!,
     orderExpiration(orderNumber: Int!): String!,
-    refreshAtlas(which: String): String!
+    refreshAtlas(which: String, masterkey: String!): String!
   }
 `;
 
