@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.3.0](https://github.com/RedFoxFinn/solita-academy-vaccine/compare/v0.2.4...v0.3.0) (2021-06-16)
+
+
+### ⚠ BREAKING CHANGES
+
+* additional functionalities that were not used in earlier version: mongoose models
+
+### Features
+
+* added mongoose models and used them in 'refreshAtlas' query ([97c63ce](https://github.com/RedFoxFinn/solita-academy-vaccine/commit/97c63ceb621d0dd9a76358fc41e9da0b1c01da20))
+
 ### [0.2.4](https://github.com/RedFoxFinn/solita-academy-vaccine/compare/v0.2.3...v0.2.4) (2021-06-16)
 
 
