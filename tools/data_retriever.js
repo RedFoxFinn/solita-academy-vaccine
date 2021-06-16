@@ -15,36 +15,36 @@ const data_retriever = async (which_data) => {
   switch (which_data.toLowerCase()) {
     case 'all': {
       try {
-        const response = await axios.get(data_url.antiqua);
-        const splitted = response.data.split(/\n/);
-        splitted.map(entry => {
+        const {data} = await axios.get(data_url.antiqua);
+        const splitted = data.split(/\n/);
+        splitted.forEach(entry => {
           json.vaccines.antiqua.push(JSON.parse(entry)); 
         });
       } catch (e) {
         console.log(e);
       }
       try {
-        const response = await axios.get(data_url.solar_buddhica);
-        const splitted = response.data.split(/\n/);
-        splitted.map(entry => {
+        const {data} = await axios.get(data_url.solar_buddhica);
+        const splitted = data.split(/\n/);
+        splitted.forEach(entry => {
           json.vaccines.solar_buddhica.push(JSON.parse(entry)); 
         });
       } catch (e) {
         console.log(e);
       }
       try {
-        const response = await axios.get(data_url.zerpfy);
-        const splitted = response.data.split(/\n/);
-        splitted.map(entry => {
+        const {data} = await axios.get(data_url.zerpfy);
+        const splitted = data.split(/\n/);
+        splitted.forEach(entry => {
           json.vaccines.zerpfy.push(JSON.parse(entry)); 
         });
       } catch (e) {
         console.log(e);
       }
       try {
-        const response = await axios.get(data_url.vaccinations);
-        const splitted = response.data.split(/\n/);
-        splitted.map(entry => {
+        const {data} = await axios.get(data_url.vaccinations);
+        const splitted = data.split(/\n/);
+        splitted.forEach(entry => {
           json.vaccinations.push(JSON.parse(entry)); 
         });
       } catch (e) {
@@ -54,9 +54,9 @@ const data_retriever = async (which_data) => {
     };
     case 'antiqua': {
       try {
-        const response = await axios.get(data_url.antiqua);
-        const splitted = response.data.split(/\n/);
-        splitted.map(entry => {
+        const {data} = await axios.get(data_url.antiqua);
+        const splitted = data.split(/\n/);
+        splitted.forEach(entry => {
           json.vaccines.antiqua.push(JSON.parse(entry)); 
         });
       } catch (e) {
@@ -66,9 +66,9 @@ const data_retriever = async (which_data) => {
     };
     case 'solar_buddhica': {
       try {
-        const response = await axios.get(data_url.solar_buddhica);
-        const splitted = response.data.split(/\n/);
-        splitted.map(entry => {
+        const {data} = await axios.get(data_url.solar_buddhica);
+        const splitted = data.split(/\n/);
+        splitted.forEach(entry => {
           json.vaccines.solar_buddhica.push(JSON.parse(entry)); 
         });
       } catch (e) {
@@ -78,9 +78,9 @@ const data_retriever = async (which_data) => {
     };
     case 'zerpfy': {
       try {
-        const response = await axios.get(data_url.zerpfy);
-        const splitted = response.data.split(/\n/);
-        splitted.map(entry => {
+        const {data} = await axios.get(data_url.zerpfy);
+        const splitted = data.split(/\n/);
+        splitted.forEach(entry => {
           json.vaccines.zerpfy.push(JSON.parse(entry)); 
         });
       } catch (e) {
@@ -90,9 +90,9 @@ const data_retriever = async (which_data) => {
     };
     case 'vaccinations': {
       try {
-        const response = await axios.get(data_url.vaccinations);
-        const splitted = response.data.split(/\n/);
-        splitted.map(entry => {
+        const {data} = await axios.get(data_url.vaccinations);
+        const splitted = data.split(/\n/);
+        splitted.forEach(entry => {
           json.vaccinations.push(JSON.parse(entry)); 
         });
       } catch (e) {
