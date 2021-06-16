@@ -1,9 +1,12 @@
 
-const { AuthenticationError, PubSub } = require('apollo-server-express');
+const { UserInputError, AuthenticationError, PubSub } = require('apollo-server-express');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
 const data_retriever = require('../../tools/data_retriever');
+
+const Vaccine = require('../mongo/vaccine');
+const Vaccination = require('../mongo/vaccination');
 
 const pubsub = new PubSub();
 
@@ -169,28 +172,229 @@ const resolvers = {
       if (args.which && arguments.includes(args.which.toLowerCase())) {
         switch (args.which.toLowerCase()) {
           case 'antiqua': {
+            await Vaccine.deleteMany({vaccine: /Antiqua/});
             const antiqua = await data_retriever('antiqua');
+            antiqua.forEach(async (a) => {
+              const vac = new Vaccine({
+                id: a['id'],
+                healthCareDistrict: a['healthCareDistrict'],
+                orderNumber: a['orderNumber'],
+                responsiblePerson: a['responsiblePerson'],
+                injections: a['injections'],
+                vaccine: a['vaccine'],
+                arrived: a['arrived']
+              });
+              try {
+                await vac.save();
+              } catch (e) {
+                throw new UserInputError(e.message, {invalidArgs: args});
+              }
+            });
             return 'Antiqua data refreshed';
           };
           case 'solar_buddhica': {
+            await Vaccine.deleteMany({vaccine: /SolarBuddhica/});
             const solar_buddhica = await data_retriever('solar_buddhica');
+            solar_buddhica.forEach(async (sb) => {
+              const vac = new Vaccine({
+                id: sb['id'],
+                healthCareDistrict: sb['healthCareDistrict'],
+                orderNumber: sb['orderNumber'],
+                responsiblePerson: sb['responsiblePerson'],
+                injections: sb['injections'],
+                vaccine: sb['vaccine'],
+                arrived: sb['arrived']
+              });
+              try {
+                await vac.save();
+              } catch (e) {
+                throw new UserInputError(e.message, {invalidArgs: args});
+              }
+            });
             return 'SolarBuddhica data refreshed';
           };
           case 'zerpfy': {
+            await Vaccine.deleteMany({vaccine: /Zerpfy/});
             const zerpfy = await data_retriever('zerpfy');
+            zerpfy.forEach(async (z) => {
+              const vac = new Vaccine({
+                id: z['id'],
+                healthCareDistrict: z['healthCareDistrict'],
+                orderNumber: z['orderNumber'],
+                responsiblePerson: z['responsiblePerson'],
+                injections: z['injections'],
+                vaccine: z['vaccine'],
+                arrived: z['arrived']
+              });
+              try {
+                await vac.save();
+              } catch (e) {
+                throw new UserInputError(e.message, {invalidArgs: args});
+              }
+            });
             return 'Zerpfy data refreshed';
           };
           case 'vaccinations': {
+            await Vaccination.deleteMany();
             const vaccinations = await data_retriever('vaccinations');
+            vaccinations.forEach(async (v) => {
+              const vacc = new Vaccination({
+                vaccinationId: v['vaccination-id'],
+                sourceBottle: v['sourceBottle'],
+                gender: v['gender'],
+                vaccinationDate: v['vaccinationDate']
+              });
+              try {
+                await vacc.save();
+              } catch (e) {
+                throw new UserInputError(e.message, {invalidArgs: args});
+              }
+            });
             return 'Vaccinations data refreshed';
           };
           default: {
-            const all = await data_retriever('all');
+            await Vaccine.deleteMany({vaccine: /Antiqua/});
+            const antiqua = await data_retriever('antiqua');
+            antiqua.forEach(async (a) => {
+              const vac = new Vaccine({
+                id: a['id'],
+                healthCareDistrict: a['healthCareDistrict'],
+                orderNumber: a['orderNumber'],
+                responsiblePerson: a['responsiblePerson'],
+                injections: a['injections'],
+                vaccine: a['vaccine'],
+                arrived: a['arrived']
+              });
+              try {
+                await vac.save();
+              } catch (e) {
+                throw new UserInputError(e.message, {invalidArgs: args});
+              }
+            });
+            await Vaccine.deleteMany({vaccine: /SolarBuddhica/});
+            const solar_buddhica = await data_retriever('solar_buddhica');
+            solar_buddhica.forEach(async (sb) => {
+              const vac = new Vaccine({
+                id: sb['id'],
+                healthCareDistrict: sb['healthCareDistrict'],
+                orderNumber: sb['orderNumber'],
+                responsiblePerson: sb['responsiblePerson'],
+                injections: sb['injections'],
+                vaccine: sb['vaccine'],
+                arrived: sb['arrived']
+              });
+              try {
+                await vac.save();
+              } catch (e) {
+                throw new UserInputError(e.message, {invalidArgs: args});
+              }
+            });
+            await Vaccine.deleteMany({vaccine: /Zerpfy/});
+            const zerpfy = await data_retriever('zerpfy');
+            zerpfy.forEach(async (z) => {
+              const vac = new Vaccine({
+                id: z['id'],
+                healthCareDistrict: z['healthCareDistrict'],
+                orderNumber: z['orderNumber'],
+                responsiblePerson: z['responsiblePerson'],
+                injections: z['injections'],
+                vaccine: z['vaccine'],
+                arrived: z['arrived']
+              });
+              try {
+                await vac.save();
+              } catch (e) {
+                throw new UserInputError(e.message, {invalidArgs: args});
+              }
+            });
+            await Vaccination.deleteMany();
+            const vaccinations = await data_retriever('vaccinations');
+            vaccinations.forEach(async (v) => {
+              const vacc = new Vaccination({
+                vaccinationId: v['vaccination-id'],
+                sourceBottle: v['sourceBottle'],
+                gender: v['gender'],
+                vaccinationDate: v['vaccinationDate']
+              });
+              try {
+                await vacc.save();
+              } catch (e) {
+                throw new UserInputError(e.message, {invalidArgs: args});
+              }
+            });
             return 'All data refreshed';
           };
         }
       } else {
-        const all = await data_retriever('all');
+        await Vaccine.deleteMany({vaccine: /Antiqua/});
+        const antiqua = await data_retriever('antiqua');
+        antiqua.forEach(async (a) => {
+          const vac = new Vaccine({
+            id: a['id'],
+            healthCareDistrict: a['healthCareDistrict'],
+            orderNumber: a['orderNumber'],
+            responsiblePerson: a['responsiblePerson'],
+            injections: a['injections'],
+            vaccine: a['vaccine'],
+            arrived: a['arrived']
+          });
+          try {
+            await vac.save();
+          } catch (e) {
+            throw new UserInputError(e.message, {invalidArgs: args});
+          }
+        });
+        await Vaccine.deleteMany({vaccine: /SolarBuddhica/});
+        const solar_buddhica = await data_retriever('solar_buddhica');
+        solar_buddhica.forEach(async (sb) => {
+          const vac = new Vaccine({
+            id: sb['id'],
+            healthCareDistrict: sb['healthCareDistrict'],
+            orderNumber: sb['orderNumber'],
+            responsiblePerson: sb['responsiblePerson'],
+            injections: sb['injections'],
+            vaccine: sb['vaccine'],
+            arrived: sb['arrived']
+          });
+          try {
+            await vac.save();
+          } catch (e) {
+            throw new UserInputError(e.message, {invalidArgs: args});
+          }
+        });
+        await Vaccine.deleteMany({vaccine: /Zerpfy/});
+        const zerpfy = await data_retriever('zerpfy');
+        zerpfy.forEach(async (z) => {
+          const vac = new Vaccine({
+            id: z['id'],
+            healthCareDistrict: z['healthCareDistrict'],
+            orderNumber: z['orderNumber'],
+            responsiblePerson: z['responsiblePerson'],
+            injections: z['injections'],
+            vaccine: z['vaccine'],
+            arrived: z['arrived']
+          });
+          try {
+            await vac.save();
+          } catch (e) {
+            throw new UserInputError(e.message, {invalidArgs: args});
+          }
+        });
+        await Vaccination.deleteMany();
+        const vaccinations = await data_retriever('vaccinations');
+        vaccinations.forEach(async (v) => {
+          const vacc = new Vaccination({
+            vaccinationId: v['vaccination-id'],
+            sourceBottle: v['sourceBottle'],
+            gender: v['gender'],
+            vaccinationDate: v['vaccinationDate']
+          });
+          try {
+            await vacc.save();
+          } catch (e) {
+            throw new UserInputError(e.message, {invalidArgs: args});
+          }
+        });
         return 'All data refreshed';
       }
     }

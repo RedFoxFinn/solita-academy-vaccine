@@ -18,7 +18,13 @@ mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
 mongoose.set('useCreateIndex', true);
 
-try {} catch (e) {}
+try {
+  mongoose.connect(config.atlas);
+  console.log('MongoDB Atlas: connected');
+} catch (e) {
+  console.log('MongoDB Atlas: connection failed');
+  console.log(e);
+}
 
 // backend routing declaration
 app.route('/')
