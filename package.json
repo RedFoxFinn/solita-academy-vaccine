@@ -1,8 +1,11 @@
 {
   "name": "vaccinations_frontend",
   "appid": "rff.dev.vaccinations",
-  "appname": ["Vaccinations","Rokotukset"],
-  "version": "0.1.1",
+  "appname": [
+    "Vaccinations",
+    "Rokotukset"
+  ],
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
