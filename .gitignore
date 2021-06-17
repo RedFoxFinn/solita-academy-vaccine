@@ -12,6 +12,7 @@
 /build
 
 # misc
+react_semver_primer_script.sh
 .DS_Store
 .env.local
 .env.development.local

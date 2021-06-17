@@ -11,7 +11,14 @@
     "react-scripts": "4.0.3",
     "web-vitals": "^1.0.1"
   },
+	"husky": {
+		"hooks": {
+			"commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+		}
+	},
   "scripts": {
+		"cm": "git-cz",
+		"release": "standard-version",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -34,5 +41,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
+    "commitizen": "^4.2.4",
+    "husky": "^6.0.0",
+    "standard-version": "^9.3.0"
   }
 }
