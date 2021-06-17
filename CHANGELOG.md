@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.5.0](https://github.com/RedFoxFinn/solita-academy-vaccine/compare/v0.4.0...v0.5.0) (2021-06-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* two new queries, modified multiple query resolvers
+
+* new queries & resolvers + modified old ones ([84e770e](https://github.com/RedFoxFinn/solita-academy-vaccine/commit/84e770e4f68d160b23a339b2452b293caac98880))
+
 ## [0.4.0](https://github.com/RedFoxFinn/solita-academy-vaccine/compare/v0.3.0...v0.4.0) (2021-06-16)
 
 
