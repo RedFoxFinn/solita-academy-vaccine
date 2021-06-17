@@ -131,7 +131,7 @@ const refreshVaccinations = async (master = false) => {
 
 const resolvers = {
   Vaccine: {
-    id: (root) => root.id,
+    id: (root) => root['id'],
     orderNumber: (root) => root.orderNumber,
     responsiblePerson: (root) => root.responsiblePerson,
     healthCareDistrict: (root) => root.healthCareDistrict,
@@ -147,10 +147,36 @@ const resolvers = {
   },
   Query: {
     vaccine: async (root, args) => {
-      return Vaccine.findOne({id: args.id.toString()});
+      switch (args.by) {
+        case 'id': return await Vaccine.findOne({id: args.id}) ?? null;
+        case 'orderNumber': return await Vaccine.findOne({orderNumber: args.orderNumber}) ?? null;
+        default: return await Vaccine.findOne() ?? null;
+      }
+    },
+    vaccination: async (root, args) => {
+      return await Vaccination.findOne({vaccinationId: args.id}) ?? null;
+    },
+    vaccines: async (root, args) => {
+      switch (args.by) {
+        case 'responsiblePerson': return await Vaccine.find({responsiblePerson: args.responsiblePerson});
+        case 'healthCareDistrict': return await Vaccine.find({healthCareDistrict: args.healthCareDistrict});
+        case 'vaccine': return await Vaccine.find({vaccine: args.vaccine});
+        default: return await Vaccine.find();
+      }
     },
     vaccinations: async (root, args) => {
-      return await Vaccination.find();
+      switch (args.by) {
+        case 'gender': {
+          if (genders.includes(args.gender.toLowerCase())) {
+            return await Vaccination.find({gender: args.gender});
+          } else if (args.gender.toLowerCase() === 'binary') {
+            return await Vaccination.find({gender: {$in: ['female','male']}});
+          }
+          return await Vaccination.find();
+        }
+        case 'date': await Vaccination.find({vaccinationDate: new Date(args.date).toUTCString()});
+        default: return await Vaccination.find();
+      }
     },
     vaccinationCount: async (root, args) => {
       if (args.gender && genders.includes(args.gender.toLowerCase())) {
@@ -162,20 +188,49 @@ const resolvers = {
       }
     },
     vaccineOrderCount: async (root, args) => {
-      if (args.brand && vaccines.includes(args.brand.toLowerCase())) {
-        return await Vaccine.countDocuments({vaccine: args.brand});
-      } else {
-        return await Vaccine.countDocuments();
+      switch (args.by) {
+        case 'brand': {
+          return vaccines.includes(args.brand.toLowerCase())
+            ? await Vaccine.countDocuments({vaccine: args.brand})
+            : await Vaccine.countDocuments();
+        }
+        case 'healthCareDistrict':
+          return await Vaccine.countDocuments({healthCareDistrict: args.healthCareDistrict})
+            ?? await Vaccine.countDocuments();
+        case 'responsiblePerson':
+          return await Vaccine.countDocuments({responsiblePerson: args.responsiblePerson})
+            ?? await Vaccine.countDocuments();
+        case 'arrivalDate':
+          return await Vaccine.countDocuments({arrived: args.arrivalDate})
+            ?? await Vaccine.countDocuments();
+        default: return await Vaccine.countDocuments();
       }
     },
     vaccineInjectionCount: async (root, args) => {
       let injectionCount = 0;
-      if (args.brand && vaccines.includes(args.brand.toLowerCase())) {
-        const vaccines = await Vaccine.find({vaccine: args.brand});
-        vaccines.forEach(v => injectionCount += v.injections);
-      } else {
-        const vaccines = await Vaccine.find();
-        vaccines.forEach(v => injectionCount += v.injections);
+      switch (args.by) {
+        case 'brand': {
+          const vaccines = vaccines.includes(args.brand.toLowerCase())
+            ? await Vaccine.find({vaccine: args.brand})
+            : await Vaccine.find();
+          vaccines.forEach(v => injectionCount += v.injections);
+        }
+        case 'healthCareDistrict': {
+          const vaccines = await Vaccine.find({healthCareDistrict: args.healthCareDistrict});
+          vaccines.forEach(v => injectionCount += v.injections);
+        }
+        case 'responsiblePerson': {
+          const vaccines = await Vaccine.find({responsiblePerson: args.responsiblePerson});
+          vaccines.forEach(v => injectionCount += v.injections);
+        }
+        case 'arrivalDate': {
+          const vaccines = await Vaccine.find({arrived: new Date(args.arrivalDate).toUTCString()});
+          vaccines.forEach(v => injectionCount += v.injections);
+        }
+        default: {
+          const vaccines = await Vaccine.find();
+          vaccines.forEach(v => injectionCount += v.injections);
+        }
       }
       return injectionCount;
     },
@@ -188,7 +243,7 @@ const resolvers = {
     },
     refreshAtlas: async (root, args) => {
       const master = await checkMastery(args.masterkey);
-      if (args.which && arguments.includes(args.which.toLowerCase()) && master) {
+      if (master && args.which && arguments.includes(args.which.toLowerCase())) {
         switch (args.which.toLowerCase()) {
           case 'antiqua': {
             return await refreshAntiqua(master)
@@ -221,7 +276,7 @@ const resolvers = {
               : 'Data not refreshed: missing or false credentials';
           };
         }
-      } else {
+      } else if (master) {
         let refreshDone = false;
         refreshDone = await refreshAntiqua(master);
         refreshDone = await refreshSolarBuddhica(master);
@@ -230,6 +285,8 @@ const resolvers = {
         return refreshDone
           ? 'All data refreshed'
           : 'Data not refreshed: missing or false credentials';
+      } else {
+        return 'Data not refreshed: missing or false credentials';
       }
     }
   }
