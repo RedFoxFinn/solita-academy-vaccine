@@ -1,19 +1,17 @@
 import React from 'react';
+import { HashRouter as Router } from 'react-router-dom';
 
 import Header from './header';
 import Footer from './footer';
-import Navigator from './navigator';
-import Vaccine from './vaccine';
-import Vaccination from './vaccination';
+import Navigator, {Routing} from './navigator';
 
 const Frontend = (props) => {
-  return <article>
+  return <Router>
     <Header/>
     <Navigator/>
-    <Vaccine/>
-    <Vaccination/>
+    <Routing/>
     <Footer/>
-  </article>;
+  </Router>;
 };
 
 export default Frontend;
