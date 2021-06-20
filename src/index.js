@@ -4,9 +4,11 @@ import reportWebVitals from './reportWebVitals';
 
 import Frontend from './components/frontend';
 
+import inforeader from './tools/inforeader';
+
 ReactDOM.render(
   <React.StrictMode>
-    <Frontend/>
+    <Frontend id={inforeader.appid()} />
   </React.StrictMode>,
   document.getElementById('root')
 );

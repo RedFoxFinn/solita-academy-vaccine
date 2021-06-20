@@ -1,0 +1,11 @@
+{
+  "intro": "Welcome to use Vaccinations, application that'll visualise anonymous data collected from COVID-19 vaccine orders and vaccinations.",
+  "disclaimer": "Note: none of the used source data is real, it is made up for code assignment purposes only.",
+  "assignment": {
+    "by": {
+      "author": "Solita Oy",
+      "url": "https://solita.fi"
+    },
+    "purpose": "Code assignment for Solita Dev Academy application"
+  }
+}
