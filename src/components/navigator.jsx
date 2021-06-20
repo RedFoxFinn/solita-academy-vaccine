@@ -5,6 +5,8 @@ import Home from './home';
 import Vaccine from './vaccine';
 import Vaccination from './vaccination';
 
+import inforeader from '../tools/inforeader';
+
 import '../styles/global.css';
 import '../styles/elements.css';
 
@@ -26,12 +28,14 @@ const Navigator = (props) => {
 };
 
 export const Routing = () => {
+  const vaccine = inforeader.vaccineSample();
+  const vaccination = inforeader.vaccinationSample();
   return <section className='viewer'>
     <Switch>
       <Route exact path='/' children={<Home />} />
       <Route path='/data' children={<p>data view</p>} />
-      <Route path='/orders' children={<Vaccine/>} />
-      <Route path='/vaccinations' children={<Vaccination/>} />
+      <Route path='/orders' children={<Vaccine {...vaccine}/>} />
+      <Route path='/vaccinations' children={<Vaccination {...vaccination}/>} />
     </Switch>
   </section>;
 };

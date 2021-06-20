@@ -1,0 +1,9 @@
+{
+  "id": "universal identifier of the order",
+  "healthCareDistrict": "HYKS|KYS|OYS|TAYS|TYKS",
+  "orderNumber": 9999,
+  "responsiblePerson": "Name of the person who is responsible to track the delivery",
+  "injections": 4.5,
+  "arrived": "2021-03-07T19:23:29.670958Z",
+  "vaccine": "Zerpfy|Antiqua|SolarBuddhica"
+}
