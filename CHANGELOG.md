@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.4.0](https://github.com/RedFoxFinn/solita-academy-vaccine/compare/v0.3.1...v0.4.0) (2021-06-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* Vaccine & Vaccination templates now require proper data
+
+### Features
+
+* added vaccine & vaccination templates ([430c29f](https://github.com/RedFoxFinn/solita-academy-vaccine/commit/430c29f1f6dea62ea1a95df124b48dddd9e8cec4)), closes [#2](https://github.com/RedFoxFinn/solita-academy-vaccine/issues/2) [#3](https://github.com/RedFoxFinn/solita-academy-vaccine/issues/3)
+
 ### [0.3.1](https://github.com/RedFoxFinn/solita-academy-vaccine/compare/v0.3.0...v0.3.1) (2021-06-20)
 
 ## [0.3.0](https://github.com/RedFoxFinn/solita-academy-vaccine/compare/v0.2.1...v0.3.0) (2021-06-20)
