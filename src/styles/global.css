@@ -5,3 +5,7 @@
   --solitavlgray: rgb(229,229,229);
   --solitared: rgb(220,30,50);
 }
+
+* {
+  font-family: 'Karma', serif;
+}
