@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.5.2](https://github.com/RedFoxFinn/solita-academy-vaccine/compare/v0.5.1...v0.5.2) (2021-06-21)
+
+
+### Bug Fixes
+
+* added missing Procfile for Heroku ([3fd5ccf](https://github.com/RedFoxFinn/solita-academy-vaccine/commit/3fd5ccf9d73523afe56f56b30c1e399952682e74))
+
 ### [0.5.1](https://github.com/RedFoxFinn/solita-academy-vaccine/compare/v0.5.0...v0.5.1) (2021-06-21)
 
 
