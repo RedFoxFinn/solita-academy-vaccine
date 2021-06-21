@@ -32,10 +32,8 @@ try {
 // backend routing declaration
 app.route('/')
   .get((req,res) => {
-    res.send(`Vaccinations backend says 'hi'`);
+    res.send(<p>Vaccinations backend says 'hi'</p>);
   });
-app.route('/ping')
-  .get((req, res) => res.send('pong'));
 app.route('/data/all')
   .get(async (req, res) => {
     let data_all = {
