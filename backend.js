@@ -32,7 +32,11 @@ try {
 // backend routing declaration
 app.route('/')
   .get((req,res) => {
-    res.send(<p>Vaccinations backend says 'hi'</p>);
+    if (config.env === 'production') {
+      app.use(express.static('build'));
+      res.sendFile(path.join(__dirname, '/build/index.html'));
+    }
+    res.send(`Vaccinations backend says 'hi'`);
   });
 app.route('/data/all')
   .get(async (req, res) => {
