@@ -14,5 +14,7 @@ Project is related to Solita Dev Academy applying process as an [assignment](htt
 
 - Node & Express
 - Axios
+- GraphQL, Apollo-server-express
+- Mongoose
 
 - Jest, jest-extended, supertest

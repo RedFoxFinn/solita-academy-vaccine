@@ -12,6 +12,9 @@ const express = require('express'),
 const apolloServer = require('./controllers/graphql/gql_server');
 const data_retriever = require('./tools/data_retriever');
 
+const Vaccine = require('./controllers/mongo/vaccine');
+const Vaccination = require('./controllers/mongo/vaccination');
+
 // mongoose setup
 mongoose.set('useFindAndModify', false);
 mongoose.set('useNewUrlParser', true);
@@ -19,7 +22,7 @@ mongoose.set('useUnifiedTopology', true);
 mongoose.set('useCreateIndex', true);
 
 try {
-  mongoose.connect(config.atlas);
+  mongoose.connect(config.atlas.toString());
   console.log('MongoDB Atlas: connected');
 } catch (e) {
   console.log('MongoDB Atlas: connection failed');
@@ -35,7 +38,12 @@ app.route('/ping')
   .get((req, res) => res.send('pong'));
 app.route('/data/all')
   .get(async (req, res) => {
-    const data_all = await data_retriever('all');
+    let data_all = {
+      vaccines: [],
+      vaccinations: []
+    };
+    data_all.vaccines = await Vaccine.find();
+    data_all.vaccinations = await Vaccination.find();
     res.json(data_all);
   });
 app.route('/data/antiqua')
