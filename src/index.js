@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
+import { ApolloProvider } from '@apollo/client';
+
+import client from './controllers/graphql/client';
 
 import Frontend from './components/frontend';
 
@@ -8,7 +11,9 @@ import inforeader from './tools/inforeader';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Frontend id={inforeader.appid()} />
+    <ApolloProvider client={client} >
+      <Frontend id={inforeader.appid()} />
+    </ApolloProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
