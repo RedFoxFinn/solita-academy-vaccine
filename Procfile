@@ -1,2 +1,2 @@
-web: node Server.js
-start: node Server.js
+web: node backend.js
+start: node backend.js
