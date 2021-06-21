@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.5.4](https://github.com/RedFoxFinn/solita-academy-vaccine/compare/v0.5.3...v0.5.4) (2021-06-21)
+
+
+### Features
+
+* added first build of the frontend for heroku ([2cc87c9](https://github.com/RedFoxFinn/solita-academy-vaccine/commit/2cc87c90f09e1279ef2ffd32e485c8fcac4f9ec3))
+
 ### [0.5.3](https://github.com/RedFoxFinn/solita-academy-vaccine/compare/v0.5.2...v0.5.3) (2021-06-21)
 
 
