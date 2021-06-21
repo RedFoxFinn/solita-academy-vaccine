@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.5.8](https://github.com/RedFoxFinn/solita-academy-vaccine/compare/v0.5.7...v0.5.8) (2021-06-21)
+
+
+### Bug Fixes
+
+* removed build from backend ([f7a011f](https://github.com/RedFoxFinn/solita-academy-vaccine/commit/f7a011fbdb282b964a0f0a825a37cb995903f329))
+
 ### [0.5.7](https://github.com/RedFoxFinn/solita-academy-vaccine/compare/v0.5.6...v0.5.7) (2021-06-21)
 
 
