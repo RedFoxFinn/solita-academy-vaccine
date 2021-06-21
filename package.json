@@ -24,6 +24,9 @@
   ],
   "author": "RedFoxFinn",
   "license": "ISC",
+  "engines": {
+    "node": "14.x"
+  },
   "dependencies": {
     "apollo-server-express": "^2.25.1",
     "axios": "^0.21.1",
