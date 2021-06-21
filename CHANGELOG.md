@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.4.1](https://github.com/RedFoxFinn/solita-academy-vaccine/compare/v0.4.0...v0.4.1) (2021-06-21)
+
+
+### Features
+
+* added graphql queries, fragments, client ([7623d42](https://github.com/RedFoxFinn/solita-academy-vaccine/commit/7623d42a54a34876c9e4e16b5b5ab828a342ea0b))
+
 ## [0.4.0](https://github.com/RedFoxFinn/solita-academy-vaccine/compare/v0.3.1...v0.4.0) (2021-06-20)
 
 
