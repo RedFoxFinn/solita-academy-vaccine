@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.5.0](https://github.com/RedFoxFinn/solita-academy-vaccine/compare/v0.4.1...v0.5.0) (2021-06-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* data rendering components added and changed
+
+### Features
+
+* rendering non-styled vaccine(order) and vaccination components based on queried data ([3e2987f](https://github.com/RedFoxFinn/solita-academy-vaccine/commit/3e2987f046e00b60f9ae3ee244912f638db242bf)), closes [#8](https://github.com/RedFoxFinn/solita-academy-vaccine/issues/8)
+
 ### [0.4.1](https://github.com/RedFoxFinn/solita-academy-vaccine/compare/v0.4.0...v0.4.1) (2021-06-21)
 
 
