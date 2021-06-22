@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Vaccine = ({
+export const Vaccine = ({
   id,
   orderNumber,
   responsiblePerson,
@@ -12,8 +12,8 @@ const Vaccine = ({
   const arrivalDate = new Date(arrived);
   const monthInMilliseconds = 30*24*60*60*1000;
   const expirationDate = new Date(arrivalDate.valueOf()+monthInMilliseconds);
-  return <section>
-    <p>this is the data of one vaccine order</p>
+  return <details>
+    <summary>{vaccine} - {orderNumber}</summary>
     <p>{id}</p>
     <p>{orderNumber}</p>
     <p>{responsiblePerson}</p>
@@ -22,7 +22,22 @@ const Vaccine = ({
     <p>{injections}</p>
     <p>{arrivalDate.toLocaleString()}</p>
     <p>{expirationDate.toLocaleString()}</p>
-  </section>;
+  </details>;
+};
+
+export const SimpleVaccine = ({
+  id,
+  orderNumber,
+  responsiblePerson,
+  healthCareDistrict,
+  vaccine,
+  injections,
+  arrived
+}) => {
+  const arrivalDate = new Date(arrived);
+  const monthInMilliseconds = 30*24*60*60*1000;
+  const expirationDate = new Date(arrivalDate.valueOf()+monthInMilliseconds);
+  return <p>simple {id}</p>
 };
 
 export default Vaccine;

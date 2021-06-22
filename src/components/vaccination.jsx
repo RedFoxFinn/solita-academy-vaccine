@@ -1,4 +1,9 @@
 import React from 'react';
+import {useLazyQuery} from '@apollo/client';
+
+import {SimpleVaccine, Vaccine} from './vaccine';
+import {Error, Loading} from './status';
+import {VACCINE} from '../controllers/graphql/queries/q_vaccine';
 
 const Vaccination = ({
   vaccinationId,
@@ -6,15 +11,22 @@ const Vaccination = ({
   sourceBottle,
   vaccinationDate
 }) => {
-  const vaccineOrder = sourceBottle;
-  return <section>
-    <p>this is the data of one vaccination</p>
+  const [loadVaccineOrder, {called, data, error, loading}] = useLazyQuery(VACCINE, {
+    variables: {
+      by: 'id',
+      id: sourceBottle
+    }
+  });
+  const vaccinated = new Date(vaccinationDate);
+  return <details>
+    <summary>{gender} - {vaccinated.toLocaleString()}</summary>
     <p>{vaccinationId}</p>
     <p>{gender}</p>
-    <p>{new Date(vaccinationDate).valueOf()}</p>
-    <p>{sourceBottle}</p>
-    <p>vaccine order info here</p>
-  </section>;
+    {!called && <button id={`order_${sourceBottle}`} onClick={() => loadVaccineOrder()}>{sourceBottle}</button>}
+    {called && loading && <Loading datatype='vaccine order' />}
+    {called && error && <Error datatype='vaccine order' />}
+    {called && data && <Vaccine {...data.vaccine} />}
+  </details>;
 };
 
 export default Vaccination;
