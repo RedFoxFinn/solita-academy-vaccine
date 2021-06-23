@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.6.0](https://github.com/RedFoxFinn/solita-academy-vaccine/compare/v0.5.9...v0.6.0) (2021-06-23)
+
+
+### ⚠ BREAKING CHANGES
+
+* new arguments for queries
+
+### Features
+
+* modified resolvers & typedefs: vaccinationCount & vaccinations ([70b746b](https://github.com/RedFoxFinn/solita-academy-vaccine/commit/70b746b72c248dc6a4507c20f0e24cce221d5ff4))
+
 ### [0.5.9](https://github.com/RedFoxFinn/solita-academy-vaccine/compare/v0.5.8...v0.5.9) (2021-06-21)
 
 
