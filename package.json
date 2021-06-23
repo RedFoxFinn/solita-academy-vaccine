@@ -14,7 +14,7 @@
     "start": "NODE_ENV=production node ./backend.js",
     "test": "jest --testTimeout=10000",
     "ci-test": "jest --verbose --transformIgnorePatterns 'node_modules/*' --detectOpenHandles",
-    "devStart": "NODE_ENV=development nodemon ./backend.js localhost 4004"
+    "devStart": "NODE_ENV=development PORT=4000 nodemon ./backend.js localhost 4000"
   },
   "keywords": [
     "solita",

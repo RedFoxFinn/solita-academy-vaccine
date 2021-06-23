@@ -174,17 +174,25 @@ const resolvers = {
           }
           return await Vaccination.find();
         }
-        case 'date': await Vaccination.find({vaccinationDate: new Date(args.date).toUTCString()});
+        case 'date': return await Vaccination.find({vaccinationDate: new Date(args.date).toUTCString()});
+        case 'sourceBottle': return await Vaccination.find({sourceBottle: args.sourceBottle});
         default: return await Vaccination.find();
       }
     },
     vaccinationCount: async (root, args) => {
-      if (args.gender && genders.includes(args.gender.toLowerCase())) {
-        return await Vaccination.countDocuments({gender: args.gender.toLowerCase()});
-      } else if (args.gender && args.gender.toLowerCase() === 'binary') {
-        return await Vaccination.countDocuments({gender: {$in: ['female','male']}});
-      } else {
-        return await Vaccination.countDocuments();
+      switch(args.by) {
+        case 'gender': {
+          if (args.gender && genders.includes(args.gender.toLowerCase())) {
+            return await Vaccination.countDocuments({gender: args.gender.toLowerCase()});
+          } else if (args.gender && args.gender.toLowerCase() === 'binary') {
+            return await Vaccination.countDocuments({gender: {$in: ['female','male']}});
+          } else {
+            return await Vaccination.countDocuments();
+          }
+        };
+        case 'date': return await Vaccination.countDocuments({vaccinationDate: new Date(args.date).toUTCString()});
+        case 'sourceBottle': return await Vaccination.countDocuments({sourceBottle: args.sourceBottle});
+        default: return Vaccination.countDocuments();
       }
     },
     vaccineOrderCount: async (root, args) => {

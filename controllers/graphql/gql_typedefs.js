@@ -26,6 +26,7 @@ const typeDefs = gql`
     ): Vaccine!,
     vaccinations(
       by: String,
+      sourceBottle: String,
       date: String,
       gender: String
     ): [Vaccination!]!,
@@ -35,7 +36,12 @@ const typeDefs = gql`
       healthCareDistrict: String,
       vaccine: String
     ): [Vaccine]!,
-    vaccinationCount(gender: String): Int!,
+    vaccinationCount(
+      by: String,
+      sourceBottle: String,
+      gender: String,
+      date: String
+    ): Int!,
     vaccineOrderCount(
       by: String,
       brand: String,
