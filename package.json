@@ -14,7 +14,7 @@
     "alias": "RedFoxFinn",
     "url": "https://github.com/RedFoxFinn/"
   },
-  "version": "0.5.1",
+  "version": "0.6.0",
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.3.20",
