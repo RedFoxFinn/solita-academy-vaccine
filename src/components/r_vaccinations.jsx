@@ -1,10 +1,10 @@
 import React from 'react';
-import {useQuery} from '@apollo/client';
+import { useSelector } from 'react-redux';
 
 import Vaccination from './vaccination';
-import {VACCINE} from '../controllers/graphql/queries/q_vaccine';
 
-const RenderVaccinations = ({vaccinations}) => {
+const RenderVaccinations = (props) => {
+  const vaccinations = useSelector(state => state.vaccinations.data);
   return <section id='vaccinations' >
     {vaccinations
       ? vaccinations.map(vaccination => <Vaccination {...vaccination} />)

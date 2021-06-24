@@ -2,8 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 import { ApolloProvider } from '@apollo/client';
+import { Provider } from 'react-redux';
 
 import client from './controllers/graphql/client';
+import store from './controllers/state/store';
 
 import Frontend from './components/frontend';
 
@@ -11,9 +13,11 @@ import inforeader from './tools/inforeader';
 
 ReactDOM.render(
   <React.StrictMode>
-    <ApolloProvider client={client} >
-      <Frontend id={inforeader.appid()} />
-    </ApolloProvider>
+    <Provider store={store} >
+      <ApolloProvider client={client} >
+        <Frontend id={inforeader.appid()} />
+      </ApolloProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

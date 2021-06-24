@@ -1,14 +1,10 @@
 import React from 'react';
 import { NavLink, Route, Switch } from 'react-router-dom';
 import {useQuery} from '@apollo/client';
+import { useSelector } from 'react-redux';
 
 import Home from './home';
-import Vaccine from './vaccine';
-import Vaccination from './vaccination';
-import inforeader from '../tools/inforeader';
-import {VACCINATIONS} from '../controllers/graphql/queries/q_vaccination';
-import {VACCINES} from '../controllers/graphql/queries/q_vaccine';
-import RenderVaccines from './r_vaccines';
+import RenderOrders from './r_orders';
 import RenderVaccinations from './r_vaccinations';
 import DataVisualisation from './d_visualise';
 import {Error, Loading} from './status';
@@ -34,29 +30,26 @@ const Navigator = (props) => {
 };
 
 export const Routing = () => {
-  const vaccine = inforeader.vaccineSample();
-  const vaccination = inforeader.vaccinationSample();
-
-  const vaccinations = useQuery(VACCINATIONS);
-  const vaccines = useQuery(VACCINES);
+  const vaccinations = useSelector(state => state.vaccinations);
+  const orders = useSelector(state => state.orders);
 
   return <section className='viewer'>
     <Switch>
       <Route exact path='/' children={<Home />} />
       <Route path='/data' children={
-        vaccines.loading || vaccines.error || vaccinations.loading || vaccinations.error
+        orders.status === 'loading' || orders.status === 'error' || vaccinations.status === 'loading' || vaccinations.status === 'error'
           ? <DataVisualisation/>
           : <DataVisualisation/>
       } />
       <Route path='/orders' children={
-        vaccines.loading || vaccines.error
-          ? vaccines.loading ? <Loading datatype='vaccine orders' /> : <Error datatype='vaccine orders' />
-          : <RenderVaccines vaccines={vaccines.data.vaccines} />
+        orders.status === 'loading' || orders.status === 'error'
+          ? orders.status === 'loading' ? <Loading datatype='vaccine orders' /> : <Error datatype='vaccine orders' />
+          : <RenderOrders orders={orders.data} />
       }/>
       <Route path='/vaccinations' children={
-        vaccinations.loading || vaccinations.error
-          ? vaccinations.loading ? <Loading datatype='vaccinations' /> : <Error datatype='vaccinations' />
-          : <RenderVaccinations vaccinations={vaccinations.data.vaccinations} />
+        vaccinations.status === 'loading' || vaccinations.status === 'error'
+          ? vaccinations.status === 'loading' ? <Loading datatype='vaccinations' /> : <Error datatype='vaccinations' />
+          : <RenderVaccinations vaccinations={vaccinations.data} />
       }/>
     </Switch>
   </section>;
