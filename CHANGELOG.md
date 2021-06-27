@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.6.1](https://github.com/RedFoxFinn/solita-academy-vaccine/compare/v0.6.0...v0.6.1) (2021-06-27)
+
+
+### Features
+
+* default sorting added to routes & resolvers ([a0dc4b6](https://github.com/RedFoxFinn/solita-academy-vaccine/commit/a0dc4b6b598177af0f902b8ce52027fb3f16fa64))
+
 ## [0.6.0](https://github.com/RedFoxFinn/solita-academy-vaccine/compare/v0.5.9...v0.6.0) (2021-06-23)
 
 
