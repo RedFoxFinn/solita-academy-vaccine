@@ -157,27 +157,66 @@ const resolvers = {
       return await Vaccination.findOne({vaccinationId: args.id}) ?? null;
     },
     vaccines: async (root, args) => {
+      let orders;
       switch (args.by) {
-        case 'responsiblePerson': return await Vaccine.find({responsiblePerson: args.responsiblePerson});
-        case 'healthCareDistrict': return await Vaccine.find({healthCareDistrict: args.healthCareDistrict});
-        case 'vaccine': return await Vaccine.find({vaccine: args.vaccine});
-        default: return await Vaccine.find();
+        case 'responsiblePerson': {
+          orders = await Vaccine.find({responsiblePerson: args.responsiblePerson});
+          break;
+        };
+        case 'healthCareDistrict': {
+          orders = await Vaccine.find({healthCareDistrict: args.healthCareDistrict})
+          break;
+        };
+        case 'vaccine': {
+          orders = await Vaccine.find({vaccine: args.vaccine});
+          break;
+        };
+        default: {
+          orders = await Vaccine.find();
+          break;
+        };
       }
+      orders.sort((a, b) => {
+        return a.orderNumber < b.orderNumber ? -1 : 1;
+      });
+      return orders;
     },
     vaccinations: async (root, args) => {
+      let vaccinations = [];
       switch (args.by) {
         case 'gender': {
           if (genders.includes(args.gender.toLowerCase())) {
-            return await Vaccination.find({gender: args.gender});
+            vaccinations = await Vaccination.find({gender: args.gender});
           } else if (args.gender.toLowerCase() === 'binary') {
-            return await Vaccination.find({gender: {$in: ['female','male']}});
+            vaccinations = await Vaccination.find({gender: {$in: ['female','male']}});
+          } else {
+            vaccinations = await Vaccination.find();
           }
-          return await Vaccination.find();
+          break;
+        };
+        case 'date': {
+          vaccinations = await Vaccination.find({vaccinationDate: new Date(args.date).toUTCString()});
+          break;
+        };
+        case 'sourceBottle': {
+          vaccinations = await Vaccination.find({sourceBottle: args.sourceBottle});
+          break;
+        };
+        default: {
+          vaccinations = await Vaccination.find();
+          break;
         }
-        case 'date': return await Vaccination.find({vaccinationDate: new Date(args.date).toUTCString()});
-        case 'sourceBottle': return await Vaccination.find({sourceBottle: args.sourceBottle});
-        default: return await Vaccination.find();
       }
+      vaccinations.sort((a, b) => {
+        return new Date(a.vaccinationDate).valueOf() < new Date(b.vaccinationDate).valueOf()
+          ? -1
+          : new Date(a.vaccinationDate).valueOf() > new Date(b.vaccinationDate).valueOf()
+            ? 1
+            : a.vaccinationId < b.vaccinationId
+              ? -1
+              : 1;
+      });
+      return vaccinations;
     },
     vaccinationCount: async (root, args) => {
       switch(args.by) {

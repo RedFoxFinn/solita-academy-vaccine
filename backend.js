@@ -46,23 +46,49 @@ app.route('/data/all')
   });
 app.route('/data/antiqua')
   .get(async (req, res) => {
-    const data_antiqua = await data_retriever('antiqua');
+    const data_antiqua = await Vaccine.find({vaccine: 'Antiqua'});
+    data_antiqua.sort((a, b) => {
+      return a.orderNumber < b.orderNumber ? -1 : 1;
+    });
     res.json(data_antiqua);
   });
 app.route('/data/solar_buddhica')
   .get(async (req, res) => {
-    const data_solar_buddhica = await data_retriever('solar_buddhica');
+    const data_solar_buddhica = await Vaccine.find({vaccine: 'SolarBuddhica'});
+    data_solar_buddhica.sort((a, b) => {
+      return a.orderNumber < b.orderNumber ? -1 : 1;
+    });
     res.json(data_solar_buddhica);
   });
 app.route('/data/zerpfy')
   .get(async (req, res) => {
-    const data_zerpfy = await data_retriever('zerpfy');
+    const data_zerpfy = await Vaccine.find({vaccine: 'Zerpfy'});
+    data_zerpfy.sort((a, b) => {
+      return a.orderNumber < b.orderNumber ? -1 : 1;
+    });
     res.json(data_zerpfy);
   });
 app.route('/data/vaccinations')
   .get(async (req, res) => {
-    const data_vaccinations = await data_retriever('vaccinations');
+    const data_vaccinations = await Vaccination.find();
+    data_vaccinations.sort((a, b) => {
+      return new Date(a.vaccinationDate).valueOf() < new Date(b.vaccinationDate).valueOf()
+        ? -1
+        : new Date(a.vaccinationDate).valueOf() > new Date(b.vaccinationDate).valueOf()
+          ? 1
+          : a.vaccinationId < b.vaccinationId
+            ? -1
+            : 1;
+    });
     res.json(data_vaccinations);
+  });
+app.route('/data/orders')
+  .get(async (req, res) => {
+    const data_orders = await Vaccine.find();
+    data_orders.sort((a, b) => {
+      return a.orderNumber < b.orderNumber ? -1 : 1;
+    });
+    res.json(data_orders);
   });
 
 apolloServer.applyMiddleware({ app, path: ['/api', '/graphql'] });
