@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.6.1](https://github.com/RedFoxFinn/solita-academy-vaccine/compare/v0.6.0...v0.6.1) (2021-06-27)
+
+
+### Features
+
+* added data sorting to r_orders ([6556632](https://github.com/RedFoxFinn/solita-academy-vaccine/commit/6556632b2badf0cb6d131cdce2254083f682f277))
+
 ## [0.6.0](https://github.com/RedFoxFinn/solita-academy-vaccine/compare/v0.5.1...v0.6.0) (2021-06-24)
 
 
