@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.7.0](https://github.com/RedFoxFinn/solita-academy-vaccine/compare/v0.6.1...v0.7.0) (2021-06-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* working data visualisation and its dependencies
+
+### Features
+
+* added data visualisation using Plotly.js ([9274d7b](https://github.com/RedFoxFinn/solita-academy-vaccine/commit/9274d7be5b3226d13c5e0b9eee786c6e442d6332)), closes [#11](https://github.com/RedFoxFinn/solita-academy-vaccine/issues/11)
+
 ### [0.6.1](https://github.com/RedFoxFinn/solita-academy-vaccine/compare/v0.6.0...v0.6.1) (2021-06-27)
 
 
