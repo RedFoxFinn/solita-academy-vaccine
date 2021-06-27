@@ -5,6 +5,7 @@
     "Vaccinations",
     "Rokotukset"
   ],
+  "homepage": "https://redfoxfinn.github.io/solita-academy-vaccine",
   "repository": {
     "type": "git",
     "url": "https://github.com/RedFoxFinn/solita-academy-vaccine"
@@ -43,6 +44,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "ci": "react-scripts test --coverage --verbose --noStackTrace --transformIgnorePatterns 'node_modules/*'",
     "eject": "react-scripts eject"
   },
@@ -68,6 +71,7 @@
     "@commitlint/cli": "^12.1.4",
     "@commitlint/config-conventional": "^12.1.4",
     "commitizen": "^4.2.4",
+    "gh-pages": "^3.2.3",
     "husky": "^6.0.0",
     "standard-version": "^9.3.0"
   }
