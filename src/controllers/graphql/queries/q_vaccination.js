@@ -21,7 +21,7 @@ export const VACCINATION = gql`
 `;
 
 export const VACCINATION_COUNT = gql`
-  query vaccinationCount($gender: String, $date: String) {
-    vaccinationCount(gender: $gender, date: $date)
+  query vaccinationCount($by: String, $gender: String, $date: String) {
+    vaccinationCount(by: $by, gender: $gender, date: $date)
   }
 `;

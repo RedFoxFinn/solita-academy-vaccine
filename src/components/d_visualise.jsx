@@ -1,8 +1,12 @@
 import React, { useEffect } from 'react';
 import Plot from 'react-plotly.js';
 import { useSelector } from 'react-redux';
+import { useQuery, useLazyQuery } from '@apollo/client';
+import { InlineIcon } from '@iconify/react';
+import arrowRight from '@iconify-icons/mdi-light/arrow-right';
 
-import {Loading} from './status';
+import { VACCINATIONS, VACCINATION_COUNT } from '../controllers/graphql/queries/q_vaccination';
+import { Error, Loading } from './status';
 import databuilder from '../tools/databuilder';
 
 const DataVisualisation = () => {
@@ -10,6 +14,7 @@ const DataVisualisation = () => {
   let vaccineDim;
   let genderDim;
   let healthcareDistrictDim;
+  const vaccinationCount = useQuery(VACCINATION_COUNT);
   const vaccinations = useSelector(state => state.vaccinations);
   const orders = useSelector(state => state.orders);
   
@@ -26,7 +31,7 @@ const DataVisualisation = () => {
   if (checkVaccinationStatus() && checkOrderStatus() && compositeData) {
     vaccineDim = {
       label: 'Vaccine',
-      values: compositeData.map(d => d.vaccine),
+      values: compositeData.map(d => d.vaccine)
     };
     genderDim = {
       label: 'Gender',
@@ -38,17 +43,93 @@ const DataVisualisation = () => {
     };
   }
 
-  const GenderRate = () => {
-    let rates = {female: 0, male: 0, nonbinary: 0};
-    vaccinations.data.forEach((v) => {
-      rates.female = v.gender === 'female' ? rates.female + 1 : rates.female;
-      rates.male = v.gender === 'male' ? rates.male + 1 : rates.male;
-      rates.nonbinary = v.gender === 'nonbinary' ? rates.nonbinary + 1 : rates.nonbinary;
+  const Female = () => {
+    const [loadVaccinationCountFemale, {called, data, error, loading}] = useLazyQuery(VACCINATION_COUNT, {
+      variables: {
+        by: 'gender',
+        gender: 'female'
+      }
     });
+    let percentage;
+    if (checkOrderStatus() && checkVaccinationStatus() && compositeData && !called) {
+      loadVaccinationCountFemale();
+    }
+    if (called && !loading && !error && data) {
+      percentage = data.vaccinationCount / vaccinationCount.data.vaccinationCount * 100;
+    }
     return <section>
-      <p>Out of all vaccinated:</p>
       <p>Female:</p>
-      <p>{rates.female} / {rates.female/vaccinations.data.length*100}%</p>
+      {called
+        ? loading
+          ? <Loading datatype='vaccination count by gender' />
+          : error
+            ? <Error datatype='vaccination count by gender' />
+            : data && <p>~ {percentage.toFixed(2)}% {<InlineIcon icon={arrowRight} />} {data.vaccinationCount} individuals</p>
+        : <Loading datatype='vaccination count by gender' />
+      }
+    </section>;
+  };
+
+  const Male = () => {
+    const [loadVaccinationCountMale, {called, data, error, loading}] = useLazyQuery(VACCINATION_COUNT, {
+      variables: {
+        by: 'gender',
+        gender: 'male'
+      }
+    });
+    let percentage;
+    if (checkOrderStatus() && checkVaccinationStatus() && compositeData && !called) {
+      loadVaccinationCountMale();
+    }
+    if (called && !loading && !error && data) {
+      percentage = data.vaccinationCount / vaccinationCount.data.vaccinationCount * 100;
+    }
+    return <section>
+      <p>Male:</p>
+      {called
+        ? loading
+          ? <Loading datatype='vaccination count by gender' />
+          : error
+            ? <Error datatype='vaccination count by gender' />
+            : data && <p>~ {percentage.toFixed(2)}% {<InlineIcon icon={arrowRight} />} {data.vaccinationCount} individuals</p>
+        : <Loading datatype='vaccination count by gender' />
+      }
+    </section>;
+  };
+
+  const Nonbinary = () => {
+    const [loadVaccinationCountNonbinary, {called, data, error, loading}] = useLazyQuery(VACCINATION_COUNT, {
+      variables: {
+        by: 'gender',
+        gender: 'nonbinary'
+      }
+    });
+    let percentage;
+    if (checkOrderStatus() && checkVaccinationStatus() && compositeData && !called) {
+      loadVaccinationCountNonbinary();
+    }
+    if (called && !loading && !error && data) {
+      percentage = data.vaccinationCount / vaccinationCount.data.vaccinationCount * 100;
+    }
+    return <section>
+      <p>Nonbinary:</p>
+      {called
+        ? loading
+          ? <Loading datatype='vaccination count by gender' />
+          : error
+            ? <Error datatype='vaccination count by gender' />
+            : data && <p>~ {percentage.toFixed(2)}% {<InlineIcon icon={arrowRight} />} {data.vaccinationCount} individuals</p>
+        : <Loading datatype='vaccination count by gender' />
+      }
+    </section>;
+  };
+
+  const GenderRate = () => {
+    return <section>
+      <h3>Out of all vaccinated:</h3>
+      <Female />
+      <Male />
+      <Nonbinary />
     </section>;
   };
   const VaccineRate = () => {};
@@ -56,27 +137,30 @@ const DataVisualisation = () => {
   const VaccineUsageRate = () => {};
 
   return <section id='dataVisualisation' >
-    <label for='datavis' >data visualisation</label>
-    <article id='datavis' >
-      {checkOrderStatus() && checkVaccinationStatus() && compositeData
-        ? <section style={{outline: '1px solid rgba(220,30,50,0.5)'}}>
-          <Plot
-            data={[
-              {
-                type: 'parcats',
-                dimensions: [
-                  vaccineDim, genderDim, healthcareDistrictDim
-                ],
-                line: {color: 'rgb(220,30,50)', shape: 'hspline'},
-                labelfont: {size: 14},
-                hoveron: 'category',
-                hoverinfo: 'count+probability',
-                arrangement: 'perpendicular'
-              }]}
-            layout={ {width: window.innerWidth/1.5, height: window.innerHeight/1.5, title: 'Vaccinations'} }/>
-        </section>
-        : <Loading datatype='composite data'/>}
-    </article>
+    {checkOrderStatus() && checkVaccinationStatus() && compositeData
+      && <GenderRate/>}
+    {checkOrderStatus() && checkVaccinationStatus() && compositeData
+      ? <article style={{outline: '1px solid rgba(220,30,50,0.5)', marginBottom: '4rem'}}>
+        <Plot
+          data={[
+            {
+              type: 'parcats',
+              dimensions: [
+                healthcareDistrictDim, genderDim, vaccineDim
+              ],
+              line: {
+                color: vaccineDim.values,
+                colorscale: [[0,'firebrick'],[1,'orange'],[2,'teal']],
+                shape: 'hspline'
+              },
+              labelfont: {size: 14},
+              hoveron: 'color',
+              hoverinfo: 'count+probability',
+              arrangement: 'perpendicular'
+            }]}
+          layout={ {width: window.innerWidth >= 1280 ? 1080 : 720, height: window.innerHeight >= 800 ? 720 : 480, title: 'Vaccinations'} }/>
+      </article>
+      : <Loading datatype='composite data'/>}
   </section>
 };
 
