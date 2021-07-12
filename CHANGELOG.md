@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.7.4](https://github.com/RedFoxFinn/solita-academy-vaccine/compare/v0.7.3...v0.7.4) (2021-07-12)
+
+
+### Features
+
+* data in numbers (+VaccineRate), refactored Rates subcomponent ([ec6726d](https://github.com/RedFoxFinn/solita-academy-vaccine/commit/ec6726da021bf464b190dffc6a87f747f57b0f92))
+
 ### [0.7.3](https://github.com/RedFoxFinn/solita-academy-vaccine/compare/v0.7.2...v0.7.3) (2021-06-29)
 
 ### [0.7.2](https://github.com/RedFoxFinn/solita-academy-vaccine/compare/v0.7.1...v0.7.2) (2021-06-27)
