@@ -15,7 +15,7 @@ const hash = (password) => {
   return bcrypt.hash(password, 10);
 };
 
-const vaccines = ['antiqua', 'solar_buddhica', 'zerpfy'];
+const vaccines = ['Antiqua', 'SolarBuddhica', 'Zerpfy'];
 const vaccinations = 'vaccinations';
 const all = 'all';
 const arguments = [...vaccines, vaccinations, all];
@@ -237,7 +237,7 @@ const resolvers = {
     vaccineOrderCount: async (root, args) => {
       switch (args.by) {
         case 'brand': {
-          return vaccines.includes(args.brand.toLowerCase())
+          return vaccines.includes(args.brand)
             ? await Vaccine.countDocuments({vaccine: args.brand})
             : await Vaccine.countDocuments();
         }
@@ -257,7 +257,7 @@ const resolvers = {
       let injectionCount = 0;
       switch (args.by) {
         case 'brand': {
-          const vaccines = vaccines.includes(args.brand.toLowerCase())
+          const vaccines = vaccines.includes(args.brand)
             ? await Vaccine.find({vaccine: args.brand})
             : await Vaccine.find();
           vaccines.forEach(v => injectionCount += v.injections);
