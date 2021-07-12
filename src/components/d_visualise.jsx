@@ -6,6 +6,7 @@ import { InlineIcon } from '@iconify/react';
 import arrowRight from '@iconify-icons/mdi-light/arrow-right';
 
 import { VACCINATIONS, VACCINATION_COUNT } from '../controllers/graphql/queries/q_vaccination';
+import { VACCINE_ORDER_COUNT } from '../controllers/graphql/queries/q_vaccine';
 import { Error, Loading } from './status';
 import databuilder from '../tools/databuilder';
 
@@ -15,6 +16,7 @@ const DataVisualisation = () => {
   let genderDim;
   let healthcareDistrictDim;
   const vaccinationCount = useQuery(VACCINATION_COUNT);
+  const orderCount = useQuery(VACCINE_ORDER_COUNT);
   const vaccinations = useSelector(state => state.vaccinations);
   const orders = useSelector(state => state.orders);
   
@@ -31,15 +33,15 @@ const DataVisualisation = () => {
   if (checkVaccinationStatus() && checkOrderStatus() && compositeData) {
     vaccineDim = {
       label: 'Vaccine',
-      values: compositeData.map(d => d.vaccine)
+      values: compositeData.map(d => d['vaccine'])
     };
     genderDim = {
       label: 'Gender',
-      values: compositeData.map(d => d.gender)
+      values: compositeData.map(d => d['gender'])
     };
     healthcareDistrictDim = {
       label: 'Healthcare district',
-      values: compositeData.map(d => d.healthCareDistrict)
+      values: compositeData.map(d => d['healthCareDistrict'])
     };
   }
 
@@ -126,19 +128,131 @@ const DataVisualisation = () => {
 
   const GenderRate = () => {
     return <section>
-      <h3>Out of all vaccinated:</h3>
       <Female />
       <Male />
       <Nonbinary />
     </section>;
   };
-  const VaccineRate = () => {};
+
+  const Antiqua = () => {
+    const [loadVaccineOrderCountAntiqua, {called, data, error, loading}] = useLazyQuery(VACCINE_ORDER_COUNT, {
+      variables: {
+        by: 'brand',
+        brand: 'Antiqua'
+      }
+    });
+    let percentage;
+    let injectionsPerOrder;
+    if (checkOrderStatus() && checkVaccinationStatus() && compositeData && !called) {
+      loadVaccineOrderCountAntiqua();
+    }
+    if (called && !loading && !error && data) {
+      percentage = data.vaccineOrderCount / orderCount.data.vaccineOrderCount * 100;
+      orders.data.find(order => injectionsPerOrder = order.vaccine === 'Antiqua' ? order.injections : 0);
+    }
+    return <section>
+      <p>Antiqua:</p>
+      {called
+        ? loading
+          ? <Loading datatype='order count by brand' />
+          : error
+            ? <Error datatype='order count by brand' />
+            : data && <React.Fragment>
+              <p>~ {percentage.toFixed(2)}% {<InlineIcon icon={arrowRight} />} {data.vaccineOrderCount} orders</p>
+              <p>{injectionsPerOrder} injections / order, {data.vaccineOrderCount * injectionsPerOrder} injections in total</p>
+            </React.Fragment>
+        : <Loading datatype='order count by brand' />
+      }
+    </section>;
+  };
+
+  const SolarBuddhica = () => {
+    const [loadVaccineOrderCountSolarBuddhica, {called, data, error, loading}] = useLazyQuery(VACCINE_ORDER_COUNT, {
+      variables: {
+        by: 'brand',
+        brand: 'SolarBuddhica'
+      }
+    });
+    let percentage;
+    let injectionsPerOrder;
+    if (checkOrderStatus() && checkVaccinationStatus() && compositeData && !called) {
+      loadVaccineOrderCountSolarBuddhica();
+    }
+    if (called && !loading && !error && data) {
+      percentage = data.vaccineOrderCount / orderCount.data.vaccineOrderCount * 100;
+      orders.data.find(order => injectionsPerOrder = order.vaccine === 'SolarBuddhica' ? order.injections : 0);
+    }
+    return <section>
+      <p>SolarBuddhica:</p>
+      {called
+        ? loading
+          ? <Loading datatype='order count by brand' />
+          : error
+            ? <Error datatype='order count by brand' />
+            : data && <React.Fragment>
+              <p>~ {percentage.toFixed(2)}% {<InlineIcon icon={arrowRight} />} {data.vaccineOrderCount} orders</p>
+              <p>{injectionsPerOrder} injections / order, {data.vaccineOrderCount * injectionsPerOrder} injections in total</p>
+            </React.Fragment>
+        : <Loading datatype='order count by brand' />
+      }
+    </section>;
+  };
+  
+  const Zerpfy = () => {
+    const [loadVaccineOrderCountZerpfy, {called, data, error, loading}] = useLazyQuery(VACCINE_ORDER_COUNT, {
+      variables: {
+        by: 'brand',
+        brand: 'Zerpfy'
+      }
+    });
+    let percentage;
+    let injectionsPerOrder;
+    if (checkOrderStatus() && checkVaccinationStatus() && compositeData && !called) {
+      loadVaccineOrderCountZerpfy();
+    }
+    if (called && !loading && !error && data) {
+      percentage = data.vaccineOrderCount / orderCount.data.vaccineOrderCount * 100;
+      orders.data.find(order => injectionsPerOrder = order.vaccine === 'Zerpfy' ? order.injections : 0);
+    }
+    return <section>
+      <p>Zerpfy:</p>
+      {called
+        ? loading
+          ? <Loading datatype='order count by brand' />
+          : error
+            ? <Error datatype='order count by brand' />
+            : data && <React.Fragment>
+              <p>~ {percentage.toFixed(2)}% {<InlineIcon icon={arrowRight} />} {data.vaccineOrderCount} orders</p>
+              <p>{injectionsPerOrder} injections / order, {data.vaccineOrderCount * injectionsPerOrder} injections in total</p>
+            </React.Fragment>
+        : <Loading datatype='order count by brand' />
+      }
+    </section>;
+  };
+  
+  const VaccineRate = () => {
+    return <section>
+      <Antiqua />
+      <SolarBuddhica />
+      <Zerpfy />
+    </section>;
+  };
   const HealthcareDistrictRate = () => {};
   const VaccineUsageRate = () => {};
 
+  const Rates = () => {
+    return <section>
+      <h3>Data in numbers:</h3>
+      <article style={{display: 'inline-flex'}}>
+      <GenderRate />
+      <VaccineRate />
+      </article>
+    </section>;
+  };
+
   return <section id='dataVisualisation' >
     {checkOrderStatus() && checkVaccinationStatus() && compositeData
-      && <GenderRate/>}
+      && <Rates/>}
     {checkOrderStatus() && checkVaccinationStatus() && compositeData
       ? <article style={{outline: '1px solid rgba(220,30,50,0.5)', marginBottom: '4rem'}}>
         <Plot
@@ -149,14 +263,14 @@ const DataVisualisation = () => {
                 healthcareDistrictDim, genderDim, vaccineDim
               ],
               line: {
-                color: vaccineDim.values,
-                colorscale: [[0,'firebrick'],[1,'orange'],[2,'teal']],
-                shape: 'hspline'
+                shape: 'hspline',
+                cmin: 0,
+                cmax: 1,
+                color: new Int8Array(vaccineDim.values),
+                autocolorscale: true
               },
               labelfont: {size: 14},
-              hoveron: 'color',
-              hoverinfo: 'count+probability',
-              arrangement: 'perpendicular'
+              arrangement: 'freeform'
             }]}
           layout={ {width: window.innerWidth >= 1280 ? 1080 : 720, height: window.innerHeight >= 800 ? 720 : 480, title: 'Vaccinations'} }/>
       </article>
