@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.8.0](https://github.com/RedFoxFinn/solita-academy-vaccine/compare/v0.7.4...v0.8.0) (2021-07-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* new components and state management dependencies
+
+### Features
+
+* new components to simplify d_visualise & composite data generation in frontend.jsx ([9e12c05](https://github.com/RedFoxFinn/solita-academy-vaccine/commit/9e12c05e4d571e9544e468ec9092c481d301df74)), closes [#11](https://github.com/RedFoxFinn/solita-academy-vaccine/issues/11) [#12](https://github.com/RedFoxFinn/solita-academy-vaccine/issues/12)
+
 ### [0.7.4](https://github.com/RedFoxFinn/solita-academy-vaccine/compare/v0.7.3...v0.7.4) (2021-07-12)
 
 
