@@ -39,6 +39,11 @@ describe('tool unit tests - idGen', () => {
     expect(gen).toBeTruthy();
     expect(gen).toMatch(`${appId}.vaccination.vacc12`);
   });
+  it('loadVaccine', () => {
+    const gen = idGen(`${appId}`, 'loadVaccine', 'orderid-random');
+    expect(gen).toBeTruthy();
+    expect(gen).toMatch(`${appId}.loadVaccineOrder.orderid-random`);
+  });
   it('routing', () => {
     const gen = idGen(`${appId}`, 'routing');
     expect(gen).toBeTruthy();

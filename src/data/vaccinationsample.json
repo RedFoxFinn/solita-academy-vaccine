@@ -1,6 +1,6 @@
 {
-  "vaccinationId": "universal identifier of the vaccination",
+  "vaccinationId": "0bd723a5-d7ac-41e5-af9e-8f4e9c0254d9",
   "gender": "male|female|nonbinary",
-  "sourceBottle": "universal identifier of the bottle",
+  "sourceBottle": "ae24e058-79af-47dd-b836-7f77a951ca55",
   "vaccinationDate": "2021-03-07T19:23:29.670958Z"
 }

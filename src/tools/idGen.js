@@ -13,6 +13,7 @@ const idGen = (parentId, idFor, ...rest) => {
     case 'footer': return `${parentId}.footer`;
     case 'order': return `${parentId}.order.${rest[0]}`;
     case 'vaccination': return `${parentId}.vaccination.${rest[0]}`;
+    case 'loadVaccine': return `${parentId}.loadVaccineOrder.${rest[0]}`
     case 'routing': return `${parentId}.routing`;
     case 'navigator': return `${parentId}.navigator`;
     case 'navlink': return `${parentId}.navlink.${rest[0]}`;

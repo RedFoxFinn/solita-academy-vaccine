@@ -1,4 +1,5 @@
 import {render, screen, fireEvent} from '@testing-library/react';
+import { isCompositeComponentWithType } from 'react-dom/test-utils';
 
 import Vaccine from './vaccine';
 import sample from '../data/vaccinesample.json';
@@ -14,6 +15,7 @@ describe('vaccine', () => {
   it('vaccine(order) renders', () => {
     const component = screen.queryByTestId(sample.id);
     expect(component).toBeTruthy();
+    isCompositeComponentWithType(component, Vaccine);
   });
   it('vaccine(order) renders ID', () => {
     const component = screen.queryByTestId(sample.id);

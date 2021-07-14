@@ -1,13 +1,15 @@
 import React from 'react';
 
 export const Error = (props) => {
-  return <section id={`error-${props.datatype}`} >
+  const id = `error-${props.datatype}`;
+  return <section id={id} data-testid={id} >
     <p>Error loading {props.datatype}</p>
   </section>;
 };
 
 export const Loading = (props) => {
-  return <section id={`loading-${props.datatype}`} >
+  const id = `loading-${props.datatype}`;
+  return <section id={id} data-testid={id} >
     <p>Loading {props.datatype}</p>
   </section>;
 };
