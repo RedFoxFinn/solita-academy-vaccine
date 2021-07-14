@@ -15,8 +15,8 @@ export const Vaccine = ({
   const arrivalDate = new Date(arrived);
   const monthInMilliseconds = 30*24*60*60*1000;
   const expirationDate = new Date(arrivalDate.valueOf()+monthInMilliseconds);
-  return <details className={embedded ? 'data' : 'data highlight'} >
-    <summary className='element' >{vaccine} - {orderNumber}</summary>
+  return <details className={embedded ? 'data' : 'data highlight'} id={id} data-testid={id} >
+    <summary className='element' >{orderNumber} - {vaccine}</summary>
     <p className='element' style={{marginTop: '0.5rem'}} >Vaccine vial ID: {id}</p>
     <p className='element' >Vaccine order number: {orderNumber}</p>
     <p className='element' >Responsible person: {responsiblePerson}</p>
@@ -26,21 +26,6 @@ export const Vaccine = ({
     <p className='element' >Date of arrival: {arrivalDate.toLocaleString()}</p>
     <p className='element' >Date of expiration: {expirationDate.toLocaleString()}</p>
   </details>;
-};
-
-export const SimpleVaccine = ({
-  id,
-  orderNumber,
-  responsiblePerson,
-  healthCareDistrict,
-  vaccine,
-  injections,
-  arrived
-}) => {
-  const arrivalDate = new Date(arrived);
-  const monthInMilliseconds = 30*24*60*60*1000;
-  const expirationDate = new Date(arrivalDate.valueOf()+monthInMilliseconds);
-  return <p>simple {id}</p>
 };
 
 export default Vaccine;

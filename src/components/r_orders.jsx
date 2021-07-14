@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import {Vaccine} from './vaccine';
 
-const RenderOrders = ({orders}) => {
+const RenderOrders = ({orders, id}) => {
   const [sorting, setSorting] = useState('oNumA');
   const setSortingOrder = (order) => {
     switch (order) {
@@ -19,7 +19,7 @@ const RenderOrders = ({orders}) => {
       default: return data;
     }
   };
-  return <section id='orders' >
+  return <section id={id} data-testid={id} >
     {orders
       ? getSorted().map(vaccine => <Vaccine embedded={false} {...vaccine} />)
       : <p>Orders</p>}

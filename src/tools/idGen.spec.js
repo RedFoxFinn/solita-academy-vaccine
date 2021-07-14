@@ -14,11 +14,6 @@ describe('tool unit tests - idGen', () => {
     expect(gen).toBeTruthy();
     expect(gen).toMatch(`${appId}.default`);
   });
-  it('frontend', () => {
-    const gen = idGen(`${appId}`, 'frontend');
-    expect(gen).toBeTruthy();
-    expect(gen).toMatch(`${appId}.frontend`);
-  });
   it('header', () => {
     const gen = idGen(`${appId}`, 'header');
     expect(gen).toBeTruthy();
@@ -44,6 +39,11 @@ describe('tool unit tests - idGen', () => {
     expect(gen).toBeTruthy();
     expect(gen).toMatch(`${appId}.vaccination.vacc12`);
   });
+  it('routing', () => {
+    const gen = idGen(`${appId}`, 'routing');
+    expect(gen).toBeTruthy();
+    expect(gen).toMatch(`${appId}.routing`);
+  });
   it('navigator', () => {
     const gen = idGen(`${appId}`,'navigator');
     expect(gen).toBeTruthy();
@@ -53,5 +53,25 @@ describe('tool unit tests - idGen', () => {
     const gen = idGen(`${appId}`, 'navlink','toHome');
     expect(gen).toBeTruthy();
     expect(gen).toMatch(`${appId}.navlink.toHome`);
+  });
+  it('home', () => {
+    const gen = idGen(`${appId}`, 'home');
+    expect(gen).toBeTruthy();
+    expect(gen).toMatch(`${appId}.home`);
+  });
+  it('data', () => {
+    const gen = idGen(`${appId}`, 'data');
+    expect(gen).toBeTruthy();
+    expect(gen).toMatch(`${appId}.datavis`);
+  });
+  it('orders', () => {
+    const gen = idGen(`${appId}`, 'orders');
+    expect(gen).toBeTruthy();
+    expect(gen).toMatch(`${appId}.orders`);
+  });
+  it('vaccinations', () => {
+    const gen = idGen(`${appId}`, 'vaccinations');
+    expect(gen).toBeTruthy();
+    expect(gen).toMatch(`${appId}.vaccinations`);
   });
 });

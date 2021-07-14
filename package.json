@@ -43,7 +43,7 @@
     "release": "standard-version",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --coverage --verbose --notify --watchAll --noStackTrace --transformIgnorePatterns 'node_modules/*'",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "ci": "react-scripts test --coverage --verbose --noStackTrace --transformIgnorePatterns 'node_modules/*'",
@@ -53,6 +53,26 @@
     "extends": [
       "react-app",
       "react-app/jest"
+    ]
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!<rootDir>/node_modules/",
+      "!<rootDir>/src/data/"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 85,
+        "functions": 85,
+        "lines": 85,
+        "statements": -10
+      }
+    },
+    "coverageReporters": [
+      "json-summary",
+      "text",
+      "lcov"
     ]
   },
   "browserslist": {

@@ -46,15 +46,17 @@ const Frontend = (props) => {
 
   useEffect(() => {
     if (stateOrders.status === 'done' && stateVaccinations.status === 'done' && orders.data && vaccinations.data) {
+      dispatch({type: 'composite/setStatus', status: 'loading'});
+      const compositeData = databuilder(stateVaccinations.data, stateOrders.data);
+      dispatch({type: 'composite/setComposite', compositeData: compositeData});
       dispatch({type: 'composite/setStatus', status: 'done'});
-      dispatch({type: 'composite/setComposite', compositeData: databuilder(stateVaccinations.data, stateOrders.data)});
     }
   }, [dispatch, stateOrders, stateVaccinations, orders, vaccinations]);
 
   return <article className='column' id={props.id} data-testid={props.id} >
     <Router>
       <Header id={idGen(props.id, 'header')} />
-      <Routing baseId={`${props.id}.route`} />
+      <Routing id={props.id} />
       <Footer id={idGen(props.id, 'footer')} />
     </Router>
   </article>;
