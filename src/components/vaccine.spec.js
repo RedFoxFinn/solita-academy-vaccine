@@ -2,10 +2,11 @@ import {render, screen, fireEvent} from '@testing-library/react';
 import { isCompositeComponentWithType } from 'react-dom/test-utils';
 
 import Vaccine from './vaccine';
-import sample from '../data/vaccinesample.json';
+import inforeader from '../tools/inforeader';
 
 describe('vaccine', () => {
   let dummy = false;
+  const sample = inforeader.vaccineSample();
   beforeEach(() => render(<Vaccine embedded={false} {...sample} />));
   it('dummy', () => {
     expect(dummy).toBe(false);

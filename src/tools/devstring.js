@@ -1,4 +1,4 @@
-function makeItDev(string) {
+export function makeItDev(string) {
   return `[${string}]`;
 }
 

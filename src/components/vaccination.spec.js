@@ -5,10 +5,11 @@ import { ApolloProvider } from '@apollo/client';
 
 import client from '../controllers/graphql/client';
 import Vaccination from './vaccination';
-import sample from '../data/vaccinationsample.json';
+import inforeader from '../tools/inforeader';
 
 describe('vaccine', () => {
   let dummy = false;
+  const sample = inforeader.vaccinationSample();
   beforeEach(() => render(<ApolloProvider client={client} ><Vaccination {...sample} /></ApolloProvider>));
   it('dummy', () => {
     expect(dummy).toBe(false);
