@@ -43,10 +43,10 @@
     "release": "standard-version",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --coverage --verbose --notify --watchAll --noStackTrace --transformIgnorePatterns 'node_modules/*'",
+    "test": "react-scripts test --colors --no-cache --coverage --verbose --notify --watchAll --noStackTrace --transformIgnorePatterns 'node_modules/*'",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "ci": "react-scripts test --coverage --verbose --noStackTrace --transformIgnorePatterns 'node_modules/*'",
+    "ci": "react-scripts test --colors --no-cache --coverage --verbose --noStackTrace --transformIgnorePatterns 'node_modules/*'",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -94,7 +94,9 @@
     "@iconify/react": "^1.1.4",
     "commitizen": "^4.2.4",
     "gh-pages": "^3.2.3",
+    "history": "^5.0.0",
     "husky": "^6.0.0",
+    "jest-canvas-mock": "^2.3.1",
     "standard-version": "^9.3.0"
   }
 }

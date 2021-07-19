@@ -20,14 +20,14 @@ const Gender = ({gender, totalCount}) => {
     if (called && !loading && !error && data) {
       percentage = data.vaccinationCount / totalCount * 100;
     }
-    return <section className='subset'>
+    return <section className='small-subset'>
       <p>{gender}:</p>
       {called
         ? loading
           ? <Loading datatype='vaccination count by gender' />
           : error
             ? <Error datatype='vaccination count by gender' />
-            : data && <p>~ {percentage.toFixed(2)}% {<InlineIcon icon={arrowRight} />} {data.vaccinationCount} individuals</p>
+            : data && <p>~ {percentage.toFixed(2)}% {<InlineIcon icon={arrowRight} />} {data.vaccinationCount} vaccinated</p>
         : <Loading datatype='vaccination count by gender' />
       }
     </section>;

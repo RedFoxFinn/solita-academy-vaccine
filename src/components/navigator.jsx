@@ -8,6 +8,7 @@ import RenderVaccinations from './r_vaccinations';
 import DataVisualisation from './d_visualise';
 import {Error, Loading} from './status';
 import idGen from '../tools/idGen';
+import {Ripple} from './loading';
 
 import '../styles/global.css';
 import '../styles/elements.css';
@@ -22,36 +23,34 @@ const Navigator = ({id}) => {
     orders: idGen(id, 'navlink', 'orders'),
     vaccinations: idGen(id, 'navlink', 'vaccinations')
   };
-  return <React.Fragment>
-    <nav className='row navigator' >
-      <NavLink
-        to='/'
-        inactiveStyle={inactiveStyle}
-        id={navlinkIds.home}
-        data-testid={navlinkIds.home}>Home</NavLink>
-      {separator}
-      <NavLink
-        to='/data'
-        activeStyle={activeStyle}
-        inactiveStyle={inactiveStyle}
-        id={navlinkIds.data}
-        data-testid={navlinkIds.data}>Data</NavLink>
-      {separator}
-      <NavLink
-        to='/orders'
-        activeStyle={activeStyle}
-        inactiveStyle={inactiveStyle}
-        id={navlinkIds.orders}
-        data-testid={navlinkIds.orders}>Orders</NavLink>
-      {separator}
-      <NavLink
-        to='/vaccinations'
-        activeStyle={activeStyle}
-        inactiveStyle={inactiveStyle}
-        id={navlinkIds.vaccinations}
-        data-testid={navlinkIds.vaccinations}>Vaccinations</NavLink>
-    </nav>
-  </React.Fragment>;
+  return <nav className='row navigator' >
+    <NavLink
+      to='/'
+      inactiveStyle={inactiveStyle}
+      id={navlinkIds.home}
+      data-testid={navlinkIds.home}>Home</NavLink>
+    {separator}
+    <NavLink
+      to='/data'
+      activeStyle={activeStyle}
+      inactiveStyle={inactiveStyle}
+      id={navlinkIds.data}
+      data-testid={navlinkIds.data}>Data</NavLink>
+    {separator}
+    <NavLink
+      to='/orders'
+      activeStyle={activeStyle}
+      inactiveStyle={inactiveStyle}
+      id={navlinkIds.orders}
+      data-testid={navlinkIds.orders}>Orders</NavLink>
+    {separator}
+    <NavLink
+      to='/vaccinations'
+      activeStyle={activeStyle}
+      inactiveStyle={inactiveStyle}
+      id={navlinkIds.vaccinations}
+      data-testid={navlinkIds.vaccinations}>Vaccinations</NavLink>
+  </nav>;
 };
 
 export const Routing = (props) => {
@@ -67,25 +66,26 @@ export const Routing = (props) => {
     return vaccinations.status === 'done' ? true : false;
   }
   function checkCompositeDataStatus() {
-    return composite.status === 'done' ? true : false;
+    return checkOrderStatus() && checkVaccinationStatus()
+      && composite.status === 'done' ? true : false;
   }
 
   return <section className='viewer' id={routingId} data-testid={routingId}>
     <Switch>
       <Route exact path='/' children={<Home id={idGen(props.id, 'home')} />} />
       <Route path='/data' children={
-        checkOrderStatus() && checkVaccinationStatus() && checkCompositeDataStatus()
+        checkCompositeDataStatus()
           ? <DataVisualisation id={idGen(props.id, 'data')} />
-          : <Loading datatype='composite data' />
+          : <Ripple/>
       } />
       <Route path='/orders' children={
         orders.status === 'loading' || orders.status === 'error'
-          ? orders.status === 'loading' ? <Loading datatype='vaccine orders' /> : <Error datatype='vaccine orders' />
+          ? orders.status === 'loading' ? <Ripple/> : <Error datatype='vaccine orders' />
           : <RenderOrders orders={orders.data} id={idGen(props.id, 'orders')} />
       }/>
       <Route path='/vaccinations' children={
         vaccinations.status === 'loading' || vaccinations.status === 'error'
-          ? vaccinations.status === 'loading' ? <Loading datatype='vaccinations' /> : <Error datatype='vaccinations' />
+          ? vaccinations.status === 'loading' ? <Ripple/> : <Error datatype='vaccinations' />
           : <RenderVaccinations vaccinations={vaccinations.data} id={idGen(props.id, 'vaccinations')} />
       }/>
     </Switch>

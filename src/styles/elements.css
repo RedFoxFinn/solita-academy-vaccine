@@ -1,3 +1,19 @@
+summary {
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight:500;
+  text-align: center;
+}
+summary:hover {
+  color: rgb(220,30,50);  
+}
+details summary::marker {
+  content: url('https://api.iconify.design/ic:baseline-keyboard-arrow-right.svg');
+}
+details[open] summary::marker {
+  color: rgb(220, 30, 50);
+  content: url('https://api.iconify.design/ic:baseline-keyboard-arrow-down.svg?color=rgb(220,30,50)');
+}
 a:link {
   color: var(--solitadgray);
   display: block;
@@ -104,21 +120,48 @@ a:hover {
   box-shadow: 2px 2px 2px rgba(220,30,50,0.75);
 }
 
-.summary {
+.set {
+  margin: 0.5rem 1rem;
+}
+
+.set-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
 }
 
-.summary .set {
-  margin: 0 1rem;
+.small-subset {
+  height: 5rem;
+  max-width: 24rem;
+  margin: 0.5rem;
+  padding: 1rem;
+}
+.subset {
+  height: 7rem;
+  max-width: 24rem;
+  margin: 0.5rem;
+  padding: 1rem;
+}
+.large-subset {
+  height: 9rem;
+  max-width: 24rem;
+  margin: 0.5rem;
+  padding: 1rem;
+}
+.subset:hover, .small-subset:hover, .large-subset:hover {
+  outline: 1px solid rgb(220, 30, 50);
 }
 
-.summary .set .subset {
-  height: 6rem;
-}
-
-.summary .set .district {
+.district {
   height: 18rem;
+  width: 20rem;
+  max-width: 24rem;
+  margin: 0.5rem;
+  padding: 1rem;
+}
+.district:hover {
+  outline: 1px solid rgb(220, 30, 50);
 }
 
 .dataVis {

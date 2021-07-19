@@ -45,7 +45,7 @@ const District = ({districtData, district, totalCount}) => {
   vaccinePercentage.a = vaccines.Antiqua / districtData.length * 100;
   vaccinePercentage.sb = vaccines.SolarBuddhica / districtData.length * 100;
   vaccinePercentage.z = vaccines.Zerpfy / districtData.length * 100;
-  return <section className={`district`}>
+  return <section className='district'>
     <p>{district}:</p>
     <p>~ {percentage.toFixed(2)}% {<InlineIcon icon={arrowRight} />} {districtData.length} vaccinations</p>
     <p>Female: ~ {genderPercentage.f.toFixed(2)}% {<InlineIcon icon={arrowRight} />} {genders.female} vaccinations</p>

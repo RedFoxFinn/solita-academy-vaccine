@@ -12,6 +12,8 @@ import databuilder from '../tools/databuilder';
 import Gender from './d_gender';
 import Order from './d_order';
 import District from './d_district';
+import '../styles/elements.css';
+import {Ripple} from './loading';
 
 const DataVisualisation = () => {
   let vaccineDim;
@@ -24,16 +26,19 @@ const DataVisualisation = () => {
   const composite = useSelector(state => state.composite);
   
   function checkOrderStatus() {
-    return orders.status === 'done' ? true : false;
+    return orderCount && orderCount.called && orderCount.data
+      && orders.status === 'done' ? true : false;
   }
   function checkVaccinationStatus() {
-    return vaccinations.status === 'done' ? true : false;
+    return vaccinationCount && vaccinationCount.called && vaccinationCount.data
+      && vaccinations.status === 'done' ? true : false;
   }
   function checkCompositeDataStatus() {
-    return composite.status === 'done' ? true : false;
+    return checkOrderStatus() && checkVaccinationStatus()
+      && composite.status === 'done' ? true : false;
   }
 
-  if (checkVaccinationStatus() && checkOrderStatus() && checkCompositeDataStatus()) {
+  if (checkCompositeDataStatus()) {
     vaccineDim = {
       label: 'Vaccine',
       values: composite.data.map(d => d['vaccine'])
@@ -49,19 +54,25 @@ const DataVisualisation = () => {
   }
 
   const GenderRate = () => {
-    return <section className='set'>
-      <Gender gender='Female' totalCount={vaccinationCount.data.vaccinationCount} />
-      <Gender gender='Male' totalCount={vaccinationCount.data.vaccinationCount} />
-      <Gender gender='Nonbinary' totalCount={vaccinationCount.data.vaccinationCount} />
-    </section>;
+    return <details className='set'>
+      <summary>by gender</summary>
+      <article className='set-container'>
+        <Gender gender='Female' totalCount={vaccinationCount.data.vaccinationCount} />
+        <Gender gender='Male' totalCount={vaccinationCount.data.vaccinationCount} />
+        <Gender gender='Nonbinary' totalCount={vaccinationCount.data.vaccinationCount} />
+      </article>
+    </details>;
   };
   
   const VaccineRate = () => {
-    return <section className='set'>
-      <Order vaccineBrand='Antiqua' totalCount={orderCount.data.vaccineOrderCount} />
-      <Order vaccineBrand='SolarBuddhica' totalCount={orderCount.data.vaccineOrderCount} />
-      <Order vaccineBrand='Zerpfy' totalCount={orderCount.data.vaccineOrderCount} />
-    </section>;
+    return <details className='set'>
+      <summary>by vaccine</summary>
+      <article className='set-container'>
+        <Order vaccineBrand='Antiqua' totalCount={orderCount.data.vaccineOrderCount} />
+        <Order vaccineBrand='SolarBuddhica' totalCount={orderCount.data.vaccineOrderCount} />
+        <Order vaccineBrand='Zerpfy' totalCount={orderCount.data.vaccineOrderCount} />
+      </article>
+    </details>;
   };
   const HealthcareDistrictRate = () => {
     const districtData = {
@@ -82,59 +93,60 @@ const DataVisualisation = () => {
       }
     });
     return <details className='set'>
-      <summary>Healthcare districts</summary>
-      <District district='HYKS' districtData={districtData.HYKS} totalCount={composite.data.length} />
-      <District district='KYS' districtData={districtData.KYS} totalCount={composite.data.length} />
-      <District district='OYS' districtData={districtData.OYS} totalCount={composite.data.length} />
-      <District district='TAYS' districtData={districtData.TAYS} totalCount={composite.data.length} />
-      <District district='TYKS' districtData={districtData.TYKS} totalCount={composite.data.length} />
-    </details>
+      <summary>by healthcare district</summary>
+      <article className='set-container'>
+        <District district='HYKS' districtData={districtData.HYKS} totalCount={composite.data.length} />
+        <District district='KYS' districtData={districtData.KYS} totalCount={composite.data.length} />
+        <District district='OYS' districtData={districtData.OYS} totalCount={composite.data.length} />
+        <District district='TAYS' districtData={districtData.TAYS} totalCount={composite.data.length} />
+        <District district='TYKS' districtData={districtData.TYKS} totalCount={composite.data.length} />
+      </article>
+    </details>;
   };
   const VaccineUsageRate = () => {};
 
   const Rates = () => {
-    return <details className='dataVis'>
-      <summary>Data in numbers:</summary>
-      <article className='summary'>
-        <GenderRate />
-        <VaccineRate />
-        <HealthcareDistrictRate />
-      </article>
-    </details>;
+    return <section className='dataVis'>
+      <h3 style={{textAlign: 'center'}}>Data in numbers</h3>
+      {checkVaccinationStatus() ? <GenderRate /> : <Ripple/>}
+      {checkOrderStatus() ? <VaccineRate /> : <Ripple/>}
+      {checkCompositeDataStatus() ? <HealthcareDistrictRate /> : <Ripple/>}
+    </section>;
   };
 
   const Visualisation = () => {
-    return <details id='dataVisualisation' className='dataVis'>
-      <summary>Data visualised:</summary>
-      <article style={{outline: '1px solid rgba(220,30,50,0.5)', marginBottom: '4rem'}}>
-        <Plot
-          data={[
-            {
-              type: 'parcats',
-              dimensions: [
-                healthcareDistrictDim, genderDim, vaccineDim
-              ],
-              line: {
-                shape: 'hspline',
-                cmin: 0,
-                cmax: 1,
-                color: new Int8Array(vaccineDim.values),
-                autocolorscale: true
-              },
-              labelfont: {size: 14},
-              arrangement: 'freeform'
-            }]}
-          layout={ {width: window.innerWidth >= 1280 ? 1080 : 720, height: window.innerHeight >= 800 ? 720 : 480, title: 'Vaccinations'} }/>
-      </article>
-    </details>
+    return <section id='dataVisualisation' className='dataVis'>
+      <h3 style={{textAlign: 'center'}}>Data visualised</h3>
+      {checkCompositeDataStatus()
+        ? <article style={{outline: '1px solid rgba(220,30,50,0.5)', marginBottom: '4rem'}}>
+          <Plot
+            data={[
+              {
+                type: 'parcats',
+                dimensions: [
+                  healthcareDistrictDim, genderDim, vaccineDim
+                ],
+                line: {
+                  shape: 'hspline',
+                  cmin: 0,
+                  cmax: 1,
+                  color: new Int8Array(vaccineDim.values),
+                  autocolorscale: true
+                },
+                labelfont: {size: 14},
+                arrangement: 'freeform'
+              }]}
+            layout={ {width: window.innerWidth >= 1280 ? 1080 : 720, height: window.innerHeight >= 800 ? 720 : 480, title: 'Vaccinations'} }/>
+        </article>
+        : <Ripple/>}
+    </section>
   };
 
   return <section id='dataVisualisation' >
-    {checkOrderStatus() && checkVaccinationStatus() && checkCompositeDataStatus()
-      && <Rates/>}
-    {checkOrderStatus() && checkVaccinationStatus() && checkCompositeDataStatus()
-      ? <Visualisation />
-      : <Loading datatype='composite data'/>}
+    <React.Fragment>
+      <Rates/>
+      <Visualisation />
+    </React.Fragment>
   </section>
 };
 
