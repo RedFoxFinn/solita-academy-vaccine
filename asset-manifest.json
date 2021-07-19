@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/solita-academy-vaccine/static/css/main.46dc312b.chunk.css",
-    "main.js": "/solita-academy-vaccine/static/js/main.6dd5828c.chunk.js",
-    "main.js.map": "/solita-academy-vaccine/static/js/main.6dd5828c.chunk.js.map",
-    "runtime-main.js": "/solita-academy-vaccine/static/js/runtime-main.a6e619ec.js",
-    "runtime-main.js.map": "/solita-academy-vaccine/static/js/runtime-main.a6e619ec.js.map",
-    "static/js/2.daaef29b.chunk.js": "/solita-academy-vaccine/static/js/2.daaef29b.chunk.js",
-    "static/js/2.daaef29b.chunk.js.map": "/solita-academy-vaccine/static/js/2.daaef29b.chunk.js.map",
-    "static/js/3.fa7e9c84.chunk.js": "/solita-academy-vaccine/static/js/3.fa7e9c84.chunk.js",
-    "static/js/3.fa7e9c84.chunk.js.map": "/solita-academy-vaccine/static/js/3.fa7e9c84.chunk.js.map",
+    "main.css": "/solita-academy-vaccine/static/css/main.aabd1c89.chunk.css",
+    "main.js": "/solita-academy-vaccine/static/js/main.a99092ec.chunk.js",
+    "main.js.map": "/solita-academy-vaccine/static/js/main.a99092ec.chunk.js.map",
+    "runtime-main.js": "/solita-academy-vaccine/static/js/runtime-main.b777eff7.js",
+    "runtime-main.js.map": "/solita-academy-vaccine/static/js/runtime-main.b777eff7.js.map",
+    "static/js/2.97226795.chunk.js": "/solita-academy-vaccine/static/js/2.97226795.chunk.js",
+    "static/js/2.97226795.chunk.js.map": "/solita-academy-vaccine/static/js/2.97226795.chunk.js.map",
+    "static/js/3.bee3c280.chunk.js": "/solita-academy-vaccine/static/js/3.bee3c280.chunk.js",
+    "static/js/3.bee3c280.chunk.js.map": "/solita-academy-vaccine/static/js/3.bee3c280.chunk.js.map",
     "index.html": "/solita-academy-vaccine/index.html",
-    "static/css/main.46dc312b.chunk.css.map": "/solita-academy-vaccine/static/css/main.46dc312b.chunk.css.map",
-    "static/js/2.daaef29b.chunk.js.LICENSE.txt": "/solita-academy-vaccine/static/js/2.daaef29b.chunk.js.LICENSE.txt"
+    "static/css/main.aabd1c89.chunk.css.map": "/solita-academy-vaccine/static/css/main.aabd1c89.chunk.css.map",
+    "static/js/2.97226795.chunk.js.LICENSE.txt": "/solita-academy-vaccine/static/js/2.97226795.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.a6e619ec.js",
-    "static/js/2.daaef29b.chunk.js",
-    "static/css/main.46dc312b.chunk.css",
-    "static/js/main.6dd5828c.chunk.js"
+    "static/js/runtime-main.b777eff7.js",
+    "static/js/2.97226795.chunk.js",
+    "static/css/main.aabd1c89.chunk.css",
+    "static/js/main.a99092ec.chunk.js"
   ]
 }
