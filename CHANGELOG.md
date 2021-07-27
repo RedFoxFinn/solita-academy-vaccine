@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.9.0](https://github.com/RedFoxFinn/solita-academy-vaccine/compare/v0.8.5...v0.9.0) (2021-07-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* home has now textcontent provided by the inforeader
+
+### Features
+
+* home - added texts returned by the inforeader ([572f022](https://github.com/RedFoxFinn/solita-academy-vaccine/commit/572f022ab1c49b4b0b9a1c15161198c7c590ac67))
+
 ### [0.8.5](https://github.com/RedFoxFinn/solita-academy-vaccine/compare/v0.8.4...v0.8.5) (2021-07-19)
 
 ### [0.8.4](https://github.com/RedFoxFinn/solita-academy-vaccine/compare/v0.8.3...v0.8.4) (2021-07-16)
