@@ -9,6 +9,7 @@ Project is related to Solita Dev Academy applying process as an [assignment](htt
 
 [![jest](https://jestjs.io/img/jest-badge.svg)](https://github.com/facebook/jest)
 ![CI Status](https://github.com/RedFoxFinn/solita-academy-vaccine/workflows/frontend/badge.svg)
+[![codecov](https://codecov.io/gh/RedFoxFinn/solita-academy-vaccine/branch/frontend/graph/badge.svg?token=HH4X65AVS9)](https://codecov.io/gh/RedFoxFinn/solita-academy-vaccine)
 
 ### Tech stack
 

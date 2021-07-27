@@ -43,7 +43,7 @@
     "release": "standard-version",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --colors --no-cache --coverage --verbose --notify --watchAll --noStackTrace --transformIgnorePatterns 'node_modules/*'",
+    "test": "react-scripts test --colors --no-cache --coverage --verbose --notify --watchAll --noStackTrace --transformIgnorePatterns 'node_modules/*' ",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "ci": "react-scripts test --colors --no-cache --coverage --verbose --noStackTrace --transformIgnorePatterns 'node_modules/*'",
@@ -58,15 +58,20 @@
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.{js,jsx}",
-      "!<rootDir>/node_modules/",
-      "!<rootDir>/src/data/"
+      "!node_modules/",
+      "!src/data/*",
+      "!src/index.js",
+      "!src/reportWebVitals.js",
+      "!src/components/navigator.jsx",
+      "!src/components/loading.jsx",
+      "!src/components/d_*.jsx",
+      "!src/controllers/graphql/**/*.js"
     ],
     "coverageThreshold": {
       "global": {
-        "branches": 85,
-        "functions": 85,
-        "lines": 85,
-        "statements": -10
+        "branches": 50,
+        "functions": 50,
+        "lines": 50
       }
     },
     "coverageReporters": [

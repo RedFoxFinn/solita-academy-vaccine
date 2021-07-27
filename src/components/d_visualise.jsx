@@ -2,13 +2,9 @@ import React, { useEffect } from 'react';
 import Plot from 'react-plotly.js';
 import { useSelector } from 'react-redux';
 import { useQuery } from '@apollo/client';
-import { InlineIcon } from '@iconify/react';
-import arrowRight from '@iconify-icons/mdi-light/arrow-right';
 
 import { VACCINATION_COUNT } from '../controllers/graphql/queries/q_vaccination';
 import { VACCINE_ORDER_COUNT } from '../controllers/graphql/queries/q_vaccine';
-import { Error, Loading } from './status';
-import databuilder from '../tools/databuilder';
 import Gender from './d_gender';
 import Order from './d_order';
 import District from './d_district';

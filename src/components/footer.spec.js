@@ -1,12 +1,16 @@
+import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { isCompositeComponentWithType } from 'react-dom/test-utils';
 
 import Footer from './footer';
 import inforeader from '../tools/inforeader';
 
-describe('footer', () => {
+describe('header', () => {
   let dummy = false;
-  const testComponentId = 'footerTestID';
+  const repoinfo = inforeader.repoinfo();
+  const authorinfo = inforeader.authorinfo();
+  const appid = inforeader.appid();
+  const testComponentId = 'headerTestID';
   it('dummy', () => {
     expect(dummy).toBe(false);
     dummy = true;
@@ -18,13 +22,15 @@ describe('footer', () => {
     const component = screen.queryByTestId(testComponentId);
     expect(component).toBeTruthy();
     isCompositeComponentWithType(component, Footer);
-    const repo = inforeader.repoinfo();
-    const author = inforeader.authorinfo();
-    const appid = inforeader.appid();
+    expect(component.textContent).toMatch(appid);
     expect(component.textContent).toMatch(`[${appid}]`);
-    expect(screen.getByText(`[${appid}]`).getAttribute('href')).toMatch(repo.url);
-    expect(component.textContent).toMatch(author.alias);
-    expect(screen.getByText(author.alias).getAttribute('href')).toMatch(author.url);
+    const repourl = screen.getByText(`[${appid}]`);
+    expect(repourl).toBeTruthy();
+    expect(repourl["href"]).toMatch(repoinfo.url);
+    expect(component.textContent).toMatch(authorinfo.alias);
+    const authorurl = screen.getByText(authorinfo.alias);
+    expect(authorurl).toBeTruthy();
+    expect(authorurl["href"]).toMatch(authorinfo.url);
   });
   it('footer - development', () => {
     process.env.NODE_ENV = 'development';
@@ -32,13 +38,15 @@ describe('footer', () => {
     const component = screen.queryByTestId(testComponentId);
     expect(component).toBeTruthy();
     isCompositeComponentWithType(component, Footer);
-    const repo = inforeader.repoinfo();
-    const author = inforeader.authorinfo();
-    const appid = inforeader.appid();
+    expect(component.textContent).toMatch(appid);
     expect(component.textContent).toMatch(`[${appid}]`);
-    expect(screen.getByText(`[${appid}]`).getAttribute('href')).toMatch(repo.url);
-    expect(component.textContent).toMatch(author.alias);
-    expect(screen.getByText(author.alias).getAttribute('href')).toMatch(author.url);
+    const repourl = screen.getByText(`[${appid}]`);
+    expect(repourl).toBeTruthy();
+    expect(repourl["href"]).toMatch(repoinfo.url);
+    expect(component.textContent).toMatch(authorinfo.alias);
+    const authorurl = screen.getByText(authorinfo.alias);
+    expect(authorurl).toBeTruthy();
+    expect(authorurl["href"]).toMatch(authorinfo.url);
   });
   it('footer - production', () => {
     process.env.NODE_ENV = 'production';
@@ -46,12 +54,14 @@ describe('footer', () => {
     const component = screen.queryByTestId(testComponentId);
     expect(component).toBeTruthy();
     isCompositeComponentWithType(component, Footer);
-    const repo = inforeader.repoinfo();
-    const author = inforeader.authorinfo();
-    const appid = inforeader.appid();
-    expect(component.textContent).toMatch(`${appid}`);
-    expect(screen.getByText(`${appid}`).getAttribute('href')).toMatch(repo.url);
-    expect(component.textContent).toMatch(author.alias);
-    expect(screen.getByText(author.alias).getAttribute('href')).toMatch(author.url);
+    expect(component.textContent).toMatch(appid);
+    expect(component.textContent).not.toMatch(`[${appid}]`);
+    const repourl = screen.getByText(`${appid}`);
+    expect(repourl).toBeTruthy();
+    expect(repourl["href"]).toMatch(repoinfo.url);
+    expect(component.textContent).toMatch(authorinfo.alias);
+    const authorurl = screen.getByText(authorinfo.alias);
+    expect(authorurl).toBeTruthy();
+    expect(authorurl["href"]).toMatch(authorinfo.url);
   });
 });

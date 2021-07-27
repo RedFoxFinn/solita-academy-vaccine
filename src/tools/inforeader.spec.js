@@ -1,5 +1,6 @@
 import inforeader from './inforeader';
 import packageinfo from '../../package.json';
+import home from '../data/home.json';
 import vaccineSample from '../data/vaccinesample.json';
 import vaccinationSample from '../data/vaccinationsample.json';
 
@@ -32,6 +33,11 @@ describe('inforeader', () => {
     expect(repoinfo).toBeTruthy();
     expect(repoinfo.type).toMatch(packageinfo.repository.type);
     expect(repoinfo.url).toMatch(packageinfo.repository.url);
+  });
+  it('home', () => {
+    const homeTexts = inforeader.home();
+    expect(homeTexts).toBeTruthy();
+    expect(homeTexts).toEqual(home);
   });
   it('vaccineSample', () => {
     const sample = inforeader.vaccineSample();

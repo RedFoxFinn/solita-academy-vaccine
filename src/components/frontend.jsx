@@ -10,6 +10,7 @@ import idGen from '../tools/idGen';
 import {VACCINATIONS} from '../controllers/graphql/queries/q_vaccination';
 import {VACCINES} from '../controllers/graphql/queries/q_vaccine';
 import databuilder from '../tools/databuilder';
+import Navigator from './navigator';
 
 import '../styles/elements.css';
 
@@ -55,7 +56,10 @@ const Frontend = (props) => {
 
   return <article className='column' id={props.id} data-testid={props.id} >
     <Router>
-      <Header id={idGen(props.id, 'header')} />
+      <section id={idGen(props.id, 'header')} className='topelement'>
+        <Header id={idGen(props.id, 'heading')} />
+        <Navigator id={idGen(props.id, 'navigator')} />
+      </section>
       <Routing id={props.id} />
       <Footer id={idGen(props.id, 'footer')} />
     </Router>

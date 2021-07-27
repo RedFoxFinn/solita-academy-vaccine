@@ -1,7 +1,4 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { InlineIcon } from '@iconify/react';
-import arrowRight from '@iconify-icons/mdi-light/arrow-right';
 
 const District = ({districtData, district, totalCount}) => {
   const percentage = districtData.length / totalCount * 100;
@@ -45,15 +42,15 @@ const District = ({districtData, district, totalCount}) => {
   vaccinePercentage.a = vaccines.Antiqua / districtData.length * 100;
   vaccinePercentage.sb = vaccines.SolarBuddhica / districtData.length * 100;
   vaccinePercentage.z = vaccines.Zerpfy / districtData.length * 100;
-  return <section className='district'>
+  return <section className='district' id={district} data-testid={district}>
     <p>{district}:</p>
-    <p>~ {percentage.toFixed(2)}% {<InlineIcon icon={arrowRight} />} {districtData.length} vaccinations</p>
-    <p>Female: ~ {genderPercentage.f.toFixed(2)}% {<InlineIcon icon={arrowRight} />} {genders.female} vaccinations</p>
-    <p>Male: ~ {genderPercentage.m.toFixed(2)}% {<InlineIcon icon={arrowRight} />} {genders.male} vaccinations</p>
-    <p>Nonbinary: ~ {genderPercentage.n.toFixed(2)}% {<InlineIcon icon={arrowRight} />} {genders.nonbinary} vaccinations</p>
-    <p>Antiqua: ~ {vaccinePercentage.a.toFixed(2)}% {<InlineIcon icon={arrowRight} />} {vaccines.Antiqua} vaccinations</p>
-    <p>SolarBuddhica: ~ {vaccinePercentage.sb.toFixed(2)}% {<InlineIcon icon={arrowRight} />} {vaccines.SolarBuddhica} vaccinations</p>
-    <p>Zerpfy: ~ {vaccinePercentage.z.toFixed(2)}% {<InlineIcon icon={arrowRight} />} {vaccines.Zerpfy} vaccinations</p>
+    <p>~ {percentage.toFixed(2)}%, {districtData.length} vaccinations</p>
+    <p>Female: ~ {genderPercentage.f.toFixed(2)}%, {genders.female} vaccinations</p>
+    <p>Male: ~ {genderPercentage.m.toFixed(2)}%, {genders.male} vaccinations</p>
+    <p>Nonbinary: ~ {genderPercentage.n.toFixed(2)}%, {genders.nonbinary} vaccinations</p>
+    <p>Antiqua: ~ {vaccinePercentage.a.toFixed(2)}%, {vaccines.Antiqua} vaccinations</p>
+    <p>SolarBuddhica: ~ {vaccinePercentage.sb.toFixed(2)}%, {vaccines.SolarBuddhica} vaccinations</p>
+    <p>Zerpfy: ~ {vaccinePercentage.z.toFixed(2)}%, {vaccines.Zerpfy} vaccinations</p>
   </section>
 };
 

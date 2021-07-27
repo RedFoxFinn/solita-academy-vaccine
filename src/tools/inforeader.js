@@ -1,5 +1,6 @@
 /* eslint-disable import/no-anonymous-default-export */
 import packageinfo from '../../package.json';
+import home from '../data/home.json';
 
 import vaccineSample from '../data/vaccinesample.json';
 import vaccinationSample from '../data/vaccinationsample.json';
@@ -28,10 +29,15 @@ function getVaccinationSample() {
   return vaccinationSample;
 }
 
+function getHome() {
+  return home;
+}
+
 export default {
   appid: getAppid,
   appname: getAppname,
   authorinfo: getAuthorinfo,
+  home: getHome,
   repoinfo: getRepoinfo,
   vaccineSample: getVaccineSample,
   vaccinationSample: getVaccinationSample
